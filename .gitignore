@@ -1,0 +1,6 @@
+/src/main/resources/application.properties
+/src/main/resources/templates/
+/src/main/resources/static/
+/src/main/resources/frontendDashboard/test/.angular/cache/15.0.0/
+/src/main/resources/frontendDashboard/test/node_modules/
+/src/test/
