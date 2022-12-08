@@ -25,7 +25,20 @@ public class EventDisc implements EventListener {
 
     @Override
     public void onEvent(GenericEvent event) {
+        gestionMessage(event);
 
+    }
+
+    private void gestionMessage(GenericEvent event) {
+        if (event instanceof MessageReceivedEvent) {
+            MessageReceivedEvent messageReceivedEvent = (MessageReceivedEvent) event;
+            if (messageReceivedEvent.getAuthor().isBot()) {
+                return;
+            }
+            if (messageReceivedEvent.getMessage().getContentRaw().equals("!ping")) {
+                messageReceivedEvent.getChannel().sendMessage("pong").queue();
+            }
+        }
     }
 
 }
