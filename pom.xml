@@ -68,7 +68,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <executable>npm run ng</executable>
+                    <executable>ng</executable>
                     <workingDirectory>src/main/resources/frontendDashboard/test</workingDirectory>
                     <arguments>
                         <argument>build</argument>
