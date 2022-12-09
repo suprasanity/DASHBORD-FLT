@@ -18,6 +18,7 @@ import java.util.List;
 
 public class WebsiteApplication {
     public static String token ;
+    public static String numChange ;
 
 @Autowired
     Bot bot;
@@ -49,6 +50,8 @@ ServiceWSStatus serviceWSStatus;
     }
     public static void main(String[] args) {
         token = args[0];
+        numChange = args[1];
+
         SpringApplication.run(WebsiteApplication.class, args);
 
 

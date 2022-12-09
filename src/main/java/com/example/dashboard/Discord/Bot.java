@@ -15,6 +15,7 @@ public Bot() {
 try{
     this.jda= JDABuilder.createDefault(WebsiteApplication.token).addEventListeners(new EventDisc()).enableIntents(GatewayIntent.MESSAGE_CONTENT).build();
     this.jda.awaitReady();
+    this.sendMsg("Lancement du bot via la pipeline jenkins à chaque commit" + WebsiteApplication.numChange,"779369141948776498","1049799594076291093");
 }catch (Exception ex){}
 }
 
