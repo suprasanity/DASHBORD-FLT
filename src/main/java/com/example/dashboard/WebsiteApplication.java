@@ -17,6 +17,9 @@ import java.util.List;
 @EnableScheduling
 
 public class WebsiteApplication {
+
+    public static boolean log = true;
+
     public static String token ;
     public static String numChange ;
 
@@ -24,12 +27,10 @@ public class WebsiteApplication {
     Bot bot;
 @Autowired
 ServiceWSStatus serviceWSStatus;
-    private static final SimpleDateFormat sdf1 = new SimpleDateFormat("HH.mm.ss");
 
 
     @Scheduled(fixedRate = 1000*60)
     public void run()  {
-        HashMap<Long, WebService> map = new HashMap<>();
         List list = serviceWSStatus.getAllWS();
          for (int i = 0; i < list.size(); i++) {
              try{
@@ -43,7 +44,9 @@ ServiceWSStatus serviceWSStatus;
              }
                 if(!((WebService) list.get(i)).getStatus().equals("200"))
                 {
-                    bot.sendMsg("Le service "+((WebService) list.get(i)).getUrl()+" est KO son code erreur est " + ((WebService) list.get(i)).getStatus(),"779369141948776498","1049799594076291093");
+                    if(log){
+                    bot.sendMsg("Le service "+((WebService) list.get(i)).getUrl()+" est KO son code erreur est " + ((WebService) list.get(i)).getStatus(),"812813246499127296","1045799117374365716");
+                    }
                 }
           }
 

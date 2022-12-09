@@ -1,5 +1,6 @@
 package com.example.dashboard.Discord;
 
+import com.example.dashboard.WebsiteApplication;
 import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
@@ -38,8 +39,16 @@ public class EventDisc implements EventListener {
             if (messageReceivedEvent.getMessage().getContentRaw().equals("!ping")) {
                 messageReceivedEvent.getChannel().sendMessage("pong").queue();
             }
-        }
+            if (messageReceivedEvent.getMessage().getContentRaw().equals("!log")) {
+               if (WebsiteApplication.log){
+                   WebsiteApplication.log = false;
+                   messageReceivedEvent.getChannel().sendMessage("Log désactivé").queue();
+                }
+               else{
+                   WebsiteApplication.log = true;
+                   messageReceivedEvent.getChannel().sendMessage("Log activé").queue();
+               }
+            }
+         }
     }
-
 }
-

@@ -17,10 +17,10 @@ public Bot() {
 try{
     this.jda= JDABuilder.createDefault(WebsiteApplication.token).addEventListeners(new EventDisc()).enableIntents(GatewayIntent.MESSAGE_CONTENT).build();
     this.jda.awaitReady();
-    this.sendMsg("Lancement du bot via la pipeline jenkins à chaque commit" ,"779369141948776498","1049799594076291093");
+    this.sendMsg("Lancement du bot via la pipeline jenkins à chaque commit grace au webHook" ,"812813246499127296","1045799117374365716");
 }catch (Exception ex){
    logger.error(ex.getMessage());
-    this.sendMsg(ex.getMessage() ,"779369141948776498","1049799594076291093");
+    this.sendMsg(ex.getMessage() ,"812813246499127296","1045799117374365716");
 }
 }
 
