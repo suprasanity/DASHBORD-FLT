@@ -37,12 +37,9 @@ ServiceWSStatus serviceWSStatus;
                  con.setRequestMethod("GET");
                  con.connect();
                  serviceWSStatus.updateStatus(((WebService) list.get(i)).getId(),String.valueOf(con.getResponseCode()));
-
              }catch (Exception e){
                  serviceWSStatus.updateStatus(((WebService) list.get(i)).getId(),"404");
-                 bot.sendMsg("Le service "+((WebService) list.get(i)).getUrl()+" est KO son code erreur est " + ((WebService) list.get(i)).getStatus(),"779369141948776498","1049799594076291093");
              }
-
                 if(!((WebService) list.get(i)).getStatus().equals("200"))
                 {
                     bot.sendMsg("Le service "+((WebService) list.get(i)).getUrl()+" est KO son code erreur est " + ((WebService) list.get(i)).getStatus(),"779369141948776498","1049799594076291093");
