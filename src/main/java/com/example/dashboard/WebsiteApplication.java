@@ -50,8 +50,10 @@ ServiceWSStatus serviceWSStatus;
     }
     public static void main(String[] args) {
         token = args[0];
-        numChange = args[1];
-
+        if(args.length>1)
+        {
+            numChange = args[1];
+        }
         SpringApplication.run(WebsiteApplication.class, args);
 
 
