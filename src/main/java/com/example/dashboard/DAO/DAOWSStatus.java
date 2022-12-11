@@ -1,8 +1,6 @@
 package com.example.dashboard.DAO;
 
 import com.example.dashboard.model.WebService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

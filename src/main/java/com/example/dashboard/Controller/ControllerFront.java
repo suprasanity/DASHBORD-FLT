@@ -1,10 +1,12 @@
 package com.example.dashboard.Controller;
 
+import com.example.dashboard.DAO.AccountRepository;
 import com.example.dashboard.DTO.Information;
 import com.example.dashboard.Discord.Bot;
 import com.example.dashboard.model.WebService;
 import com.example.dashboard.service.ServiceWSStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +21,9 @@ public class ControllerFront {
     @Autowired
     ServiceWSStatus serviceWSStatus;
 
+    @Autowired
+    AccountRepository accountRepository;
+
     @PostMapping("/botMsg")
     @ResponseBody
     public String sendMsg(@RequestBody String msg){
@@ -27,6 +32,7 @@ public class ControllerFront {
     }
 
     @PostMapping("/saveService")
+    @PreAuthorize("hasAnyAuthority('ROLE_KAMINOAIN', 'ROLE_EMPEROR')")
     @ResponseBody
     public String saveService(@RequestBody Information url){
         serviceWSStatus.addWS(url.getUrl());

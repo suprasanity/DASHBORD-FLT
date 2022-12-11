@@ -18,7 +18,7 @@ import java.util.List;
 
 public class WebsiteApplication {
 
-    public static boolean log = true;
+    public static boolean log = false;
 
     public static String token ;
     public static String numChange ;
