@@ -8,14 +8,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ServiceWSStatus {
+public  class ServiceWSStatus {
     @Autowired
     private DAOWSStatus daoWSStatus;
     public void addWS(String urlWS)
     {
         daoWSStatus.save(urlWS);
     }
-    public List getAllWS()
+    public List<WebService> getAllWS()
     {
        return daoWSStatus.getAll();
     }

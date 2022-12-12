@@ -19,7 +19,7 @@ public class WebsiteApplication {
     public static boolean log = false;
 
     public static String token ;
-    public static String numChange ;
+    public static String numChange = null;
 
 @Autowired
     Bot bot;
@@ -29,7 +29,7 @@ ServiceWSStatus serviceWSStatus;
 
     @Scheduled(fixedRate = 1000*60)
     public void run()  {
-        List list = serviceWSStatus.getAllWS();
+        List <WebService>list = serviceWSStatus.getAllWS();
          for (int i = 0; i < list.size(); i++) {
              try{
                  URL url = new URL(((WebService) list.get(i)).getUrl());
@@ -51,7 +51,7 @@ ServiceWSStatus serviceWSStatus;
         token = args[0];
         if(args.length>1)
         {
-            numChange = args[1];
+             numChange = args[1];
         }
         SpringApplication.run(WebsiteApplication.class, args);
 

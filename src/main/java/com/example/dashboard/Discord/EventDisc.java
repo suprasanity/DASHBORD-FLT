@@ -40,7 +40,7 @@ public class EventDisc implements EventListener {
                 messageReceivedEvent.getChannel().sendMessage("pong").queue();
             }
             if (messageReceivedEvent.getMessage().getContentRaw().equals("!log")) {
-               if (WebsiteApplication.log){
+               if (WebsiteApplication.log) {
                    WebsiteApplication.log = false;
                    messageReceivedEvent.getChannel().sendMessage("Log désactivé").queue();
                 }

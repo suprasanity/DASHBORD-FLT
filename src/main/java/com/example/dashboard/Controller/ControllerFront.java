@@ -1,6 +1,5 @@
 package com.example.dashboard.Controller;
 
-import com.example.dashboard.DAO.AccountRepository;
 import com.example.dashboard.DTO.Information;
 import com.example.dashboard.Discord.Bot;
 import com.example.dashboard.model.WebService;
@@ -21,8 +20,7 @@ public class ControllerFront {
     @Autowired
     ServiceWSStatus serviceWSStatus;
 
-    @Autowired
-    AccountRepository accountRepository;
+
 
     @PostMapping("/botMsg")
     @ResponseBody
@@ -32,7 +30,6 @@ public class ControllerFront {
     }
 
     @PostMapping("/saveService")
-    @PreAuthorize("hasAnyAuthority('ROLE_KAMINOAIN', 'ROLE_EMPEROR')")
     @ResponseBody
     public String saveService(@RequestBody Information url){
         serviceWSStatus.addWS(url.getUrl());
