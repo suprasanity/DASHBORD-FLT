@@ -5,7 +5,6 @@ import com.example.dashboard.Discord.Bot;
 import com.example.dashboard.model.WebService;
 import com.example.dashboard.service.ServiceWSStatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,7 +37,7 @@ public class ControllerFront {
 
     @GetMapping("/getAllService")
     @ResponseBody
-    public List getAllService(){
+    public List <WebService> getAllService(){
         return serviceWSStatus.getAllWS();
     }
     @PostMapping("/deleteService")

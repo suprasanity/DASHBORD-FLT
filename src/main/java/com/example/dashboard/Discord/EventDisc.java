@@ -13,10 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class EventDisc implements EventListener {
 
-    private Logger logger = LoggerFactory.getLogger(EventDisc.class);
+    private final Logger logger = LoggerFactory.getLogger(EventDisc.class);
 
-    private boolean bonALlowed = true;
-    private int count = 0;
     @Autowired
     Bot bot;
     public EventDisc() {

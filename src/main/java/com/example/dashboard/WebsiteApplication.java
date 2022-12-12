@@ -32,17 +32,17 @@ ServiceWSStatus serviceWSStatus;
         List <WebService>list = serviceWSStatus.getAllWS();
          for (int i = 0; i < list.size(); i++) {
              try{
-                 URL url = new URL(((WebService) list.get(i)).getUrl());
+                 URL url = new URL( (list.get(i)).getUrl());
                  HttpURLConnection con = (HttpURLConnection) url.openConnection();
                  con.setRequestMethod("GET");
                  con.connect();
-                 serviceWSStatus.updateStatus(((WebService) list.get(i)).getId(),String.valueOf(con.getResponseCode()));
+                 serviceWSStatus.updateStatus((list.get(i)).getId(),String.valueOf(con.getResponseCode()));
              }catch (Exception e){
-                 serviceWSStatus.updateStatus(((WebService) list.get(i)).getId(),"404");
+                 serviceWSStatus.updateStatus((list.get(i)).getId(),"404");
              }
-                if(!((WebService) list.get(i)).getStatus().equals("200") && log)
+                if(!( list.get(i)).getStatus().equals("200") && log)
                 {
-                    bot.sendMsg("Le service "+((WebService) list.get(i)).getUrl()+" est KO son code erreur est " + ((WebService) list.get(i)).getStatus(),"812813246499127296","1045799117374365716");
+                    bot.sendMsg("Le service "+( list.get(i)).getUrl()+" est KO son code erreur est " + ( list.get(i)).getStatus(),"812813246499127296","1045799117374365716");
                 }
           }
 
