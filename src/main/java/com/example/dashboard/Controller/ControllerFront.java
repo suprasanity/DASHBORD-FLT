@@ -7,6 +7,8 @@ import com.example.dashboard.service.ServiceWSStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,7 +26,11 @@ public class ControllerFront {
     @PostMapping("/botMsg")
     @ResponseBody
     public String sendMsg(@RequestBody String msg){
-        bot.sendMsg(msg,"954877593197350964","954877593713266731");
+        List l=new ArrayList();
+        l.add(new File("C:/Users/yann/Desktop/bazar/PPP_Y.Jeanmaire-dit-cartier_2021_corrige/Stage_Y.Jeanmaire-dit-cartier_2021.pdf"));
+
+
+        bot.sendMsg(msg,"812813246499127296","1045799117374365716");
         return "true";
     }
 
