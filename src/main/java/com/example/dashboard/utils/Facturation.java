@@ -15,7 +15,7 @@ public class Facturation {
     private  String libelle;
     private  String factureName;
 
-    public String fileOutputPath="\\home\\pi\\Deploiment\\facture";
+    public String fileOutputPath="/home/pi/Deploiment/facture/";
 
     public Facturation(String societe, String payeur, String montant, String date, String libelle) throws ParserConfigurationException, IOException {
         Societe = societe;
