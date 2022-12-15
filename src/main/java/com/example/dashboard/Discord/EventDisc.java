@@ -1,8 +1,7 @@
 package com.example.dashboard.Discord;
 
 import com.example.dashboard.WebsiteApplication;
-import com.example.dashboard.utils.Facturation;
-import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import com.example.dashboard.service.Facturation;
 import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
@@ -11,12 +10,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
 
 
-@Component
+@Service
 public class EventDisc implements EventListener {
 
     @Autowired

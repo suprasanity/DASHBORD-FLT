@@ -20,18 +20,26 @@
     <title>Fourth Leaves Technologie</title>
 </head>
 <body>
-    <h1>Numéro TVA CORP : FR78275</h1>
-    <h2 th:text="'Contracteur : ' + ${contracteur}"></h2>
+    <h1>Fourth Leaves Technologie</h1>
+    <h2>Facture</h2>
+    <h2>Numéro TVA CORP : FR78275</h2>
+    <h2>
+        <span th:text="'Contracteur : ' + ${contracteur}"></span>
+    </h2>
     <table>
         <caption>Facture n°54</caption>
     <tr>
-        <th></th>
+        <th>Libelle</th>
         <th>Prix</th>
         <th>TVA</th>
     </tr>
     <tr>
-        <td th:text="${Libelle}"> </td>
-        <td th:text="${Prix}"> </td>
+        <td>
+            <span th:text="${Libelle}"> </span>
+        </td>
+        <td>
+            <span th:text="${Prix}"> </span>
+        </td>
         <td>20%</td>
 </table>
 </body>

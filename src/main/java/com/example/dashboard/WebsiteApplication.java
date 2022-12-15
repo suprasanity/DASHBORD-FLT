@@ -1,7 +1,10 @@
 package com.example.dashboard;
 import com.example.dashboard.Discord.Bot;
+import com.example.dashboard.Discord.EventDisc;
 import com.example.dashboard.model.WebService;
 import com.example.dashboard.service.ServiceWSStatus;
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,6 +28,9 @@ public class WebsiteApplication {
     Bot bot;
 @Autowired
 ServiceWSStatus serviceWSStatus;
+
+@Autowired
+EventDisc eventDisc;
 
 
     @Scheduled(fixedRate = 1000*60)
@@ -54,6 +60,8 @@ ServiceWSStatus serviceWSStatus;
              numChange = args[1];
         }
         SpringApplication.run(WebsiteApplication.class, args);
+
+
 
 
 
