@@ -18,7 +18,7 @@ public class Facturation {
     TemplateEngine templateEngine;
     private  String factureName;
 
-    public String fileOutputPath="/home/pi/Deploiement/facture/";
+    public String fileOutputPath="/home/pi/Deploiment/facture/";
 
     @Autowired
     public Facturation(TemplateEngine templateEngine)  {
