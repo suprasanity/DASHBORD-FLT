@@ -19,6 +19,8 @@ import java.io.IOException;
 @Component
 public class EventDisc implements EventListener {
 
+    @Autowired
+    Facturation facturation;
     private final Logger logger = LoggerFactory.getLogger(EventDisc.class);
 
 
@@ -47,8 +49,9 @@ public class EventDisc implements EventListener {
                 messageReceivedEvent.getChannel().sendMessage("pong").queue();
             }
             if (messageReceivedEvent.getMessage().getContentRaw().startsWith("!facture")) {
-                Facturation facturation = new Facturation(messageReceivedEvent.getMessage().getContentRaw().split(" ")[1]);
-                FileUpload fileUpload = FileUpload.fromData(new File(facturation.fileOutputPath+messageReceivedEvent.getMessage().getContentRaw().split(" ")[1]+".pdf"));
+                long rand= Math.round( Math.random() * ( 1000 - 0 ));
+                facturation.build(messageReceivedEvent.getMessage().getContentRaw().split(" ")[1]+rand, messageReceivedEvent.getMessage().getContentRaw().split(" ")[2], Integer.parseInt( messageReceivedEvent.getMessage().getContentRaw().split(" ")[3]));
+                FileUpload fileUpload = FileUpload.fromData(new File(facturation.fileOutputPath+messageReceivedEvent.getMessage().getContentRaw().split(" ")[1]+rand+".pdf"));
                 messageReceivedEvent.getChannel().sendMessage("Facture").addFiles(fileUpload).queue();
             }
             if (messageReceivedEvent.getMessage().getContentRaw().equals("!log")) {

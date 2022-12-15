@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+        "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style>
+        table, caption, th, td {
+
+            border: 2px solid skyblue;
+            border-collapse: collapse;
+
+        }
+        caption, th, td {
+
+            padding: 8px;
+
+        }
+    </style>
+    <title>Fourth Leaves Technologie</title>
+</head>
+<body>
+    <h1>Numéro TVA CORP : FR78275</h1>
+    <h2 th:text="'Contracteur : ' + ${contracteur}"></h2>
+    <table>
+        <caption>Facture n°54</caption>
+    <tr>
+        <th></th>
+        <th>Prix</th>
+        <th>TVA</th>
+    </tr>
+    <tr>
+        <td th:text="${Libelle}"> </td>
+        <td th:text="${Prix}"> </td>
+        <td>20%</td>
+</table>
+</body>
+</html>

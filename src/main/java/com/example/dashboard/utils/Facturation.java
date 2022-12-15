@@ -1,13 +1,18 @@
 package com.example.dashboard.utils;
 
 import com.itextpdf.html2pdf.HtmlConverter;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.thymeleaf.TemplateEngine;
 
-import javax.xml.parsers.ParserConfigurationException;
+import org.thymeleaf.context.Context;
 import java.io.File;
 import java.io.IOException;
 
+@Component
 public class Facturation {
+    @Autowired
+    TemplateEngine templateEngine;
     private  String Societe;
     private  String payeur;
     private  String montant;
@@ -17,17 +22,20 @@ public class Facturation {
 
     public String fileOutputPath="/home/pi/Deploiment/facture/";
 
-    public Facturation(String societe, String payeur, String montant, String date, String libelle) throws ParserConfigurationException, IOException {
-        Societe = societe;
-        this.payeur = payeur;
-        this.montant = montant;
-        this.date = date;
-        this.libelle = libelle;
-
+    @Autowired
+    public Facturation(TemplateEngine templateEngine)  {
+    this.templateEngine=templateEngine;
     }
 
 
-    public Facturation(String factureName) throws IOException {
+    public void build (String libelle,String contracteur , int prix) throws IOException {
+
+        Context ctx = new Context();
+        ctx.setVariable("libelle", libelle);
+        ctx.setVariable("contracteur", contracteur);
+        ctx.setVariable("prix", prix);
+
+        templateEngine.process("template",ctx);
         HtmlConverter.convertToPdf(new File(fileOutputPath+"template.html"),new File(fileOutputPath+factureName+".pdf"));
     }
 }
