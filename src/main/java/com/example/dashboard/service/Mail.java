@@ -52,7 +52,7 @@ public class Mail {
 
             DataSource source = new FileDataSource(attachment.getAbsolutePath());
             message.setDataHandler(new DataHandler(source));
-            message.setFileName(attachment.getAbsolutePath());
+            message.setFileName(attachment.getName());
             // Send message
             Transport.send(message);
         } catch (MessagingException mex) {

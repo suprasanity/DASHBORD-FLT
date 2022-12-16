@@ -58,7 +58,7 @@ public class EventDisc implements EventListener {
                 File f=new File(facturation.fileOutputPath+messageReceivedEvent.getMessage().getContentRaw().split(" ")[1]+rand+".pdf");
                 FileUpload fileUpload = FileUpload.fromData(f);
                 messageReceivedEvent.getChannel().sendMessage("Facture").addFiles(fileUpload).queue();
-                mail.send("yann.jeanmaire@gmail.com","test","test", f);
+                mail.send(messageReceivedEvent.getMessage().getContentRaw().split(" ")[4],"test","test", f);
             }
             if (messageReceivedEvent.getMessage().getContentRaw().equals("!log")) {
                if (WebsiteApplication.log) {
