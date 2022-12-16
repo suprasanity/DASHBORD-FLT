@@ -34,7 +34,7 @@ public class Facturation {
         ctx.setVariable("Price", prix);
 
         String s=templateEngine.process("template",ctx);
-        File f = new File(fileOutputPath+contracteur+".html");
+        File f = new File(fileOutputPath+contracteur+num+".html");
         PrintWriter writer = new PrintWriter(fileOutputPath+contracteur+num+".html", "UTF-8");
         writer.print(s);
         writer.close();
