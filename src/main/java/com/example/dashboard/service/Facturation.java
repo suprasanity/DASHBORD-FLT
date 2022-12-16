@@ -26,19 +26,19 @@ public class Facturation {
     }
 
 
-    public void build (String contracteur,String libelle, int prix) throws IOException {
+    public void build (String contracteur,String libelle, int prix,long num) throws IOException {
 
         Context ctx = new Context();
-        ctx.setVariable("Libelle", libelle);
+        ctx.setVariable("Item", libelle);
         ctx.setVariable("contracteur", contracteur);
-        ctx.setVariable("Prix", prix);
+        ctx.setVariable("Price", prix);
 
         String s=templateEngine.process("template",ctx);
         File f = new File(fileOutputPath+contracteur+".html");
-        PrintWriter writer = new PrintWriter(fileOutputPath+contracteur+".html", "UTF-8");
+        PrintWriter writer = new PrintWriter(fileOutputPath+contracteur+num+".html", "UTF-8");
         writer.print(s);
         writer.close();
-        HtmlConverter.convertToPdf(f,new File(fileOutputPath+contracteur+".pdf"));
+        HtmlConverter.convertToPdf(f,new File(fileOutputPath+contracteur+num+".pdf"));
         f.delete();
     }
 }

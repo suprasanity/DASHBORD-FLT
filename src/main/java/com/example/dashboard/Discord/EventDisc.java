@@ -2,6 +2,7 @@ package com.example.dashboard.Discord;
 
 import com.example.dashboard.WebsiteApplication;
 import com.example.dashboard.service.Facturation;
+import com.example.dashboard.service.Mail;
 import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
@@ -21,6 +22,9 @@ public class EventDisc implements EventListener {
 
     @Autowired
     Facturation facturation;
+
+    @Autowired
+    Mail mail;
     private final Logger logger = LoggerFactory.getLogger(EventDisc.class);
 
 
@@ -49,10 +53,12 @@ public class EventDisc implements EventListener {
                 messageReceivedEvent.getChannel().sendMessage("pong").queue();
             }
             if (messageReceivedEvent.getMessage().getContentRaw().startsWith("!facture")) {
-                long rand= Math.round( Math.random() * ( 1000 - 0 ));
-                facturation.build(messageReceivedEvent.getMessage().getContentRaw().split(" ")[1]+rand, messageReceivedEvent.getMessage().getContentRaw().split(" ")[2], Integer.parseInt( messageReceivedEvent.getMessage().getContentRaw().split(" ")[3]));
-                FileUpload fileUpload = FileUpload.fromData(new File(facturation.fileOutputPath+messageReceivedEvent.getMessage().getContentRaw().split(" ")[1]+rand+".pdf"));
+                long rand= Math.round( Math.random() * ( 1000  ));
+                facturation.build(messageReceivedEvent.getMessage().getContentRaw().split(" ")[1], messageReceivedEvent.getMessage().getContentRaw().split(" ")[2], Integer.parseInt( messageReceivedEvent.getMessage().getContentRaw().split(" ")[3]),rand);
+                File f=new File(facturation.fileOutputPath+messageReceivedEvent.getMessage().getContentRaw().split(" ")[1]+rand+".pdf");
+                FileUpload fileUpload = FileUpload.fromData(f);
                 messageReceivedEvent.getChannel().sendMessage("Facture").addFiles(fileUpload).queue();
+                mail.send("yann.jeanmaire@gmail.com","test","test", f);
             }
             if (messageReceivedEvent.getMessage().getContentRaw().equals("!log")) {
                if (WebsiteApplication.log) {

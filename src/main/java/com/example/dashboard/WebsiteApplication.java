@@ -2,6 +2,7 @@ package com.example.dashboard;
 import com.example.dashboard.Discord.Bot;
 import com.example.dashboard.Discord.EventDisc;
 import com.example.dashboard.model.WebService;
+import com.example.dashboard.service.Mail;
 import com.example.dashboard.service.ServiceWSStatus;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -10,6 +11,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+
+import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
@@ -32,6 +35,8 @@ ServiceWSStatus serviceWSStatus;
 @Autowired
 EventDisc eventDisc;
 
+@Autowired
+Mail mail;
 
     @Scheduled(fixedRate = 1000*60)
     public void run()  {

@@ -1,46 +1,177 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-        "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <style>
-        table, caption, th, td {
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>A simple, clean, and responsive HTML invoice template</title>
 
-            border: 2px solid skyblue;
-            border-collapse: collapse;
+		<style>
+			.invoice-box {
+				max-width: 800px;
+				margin: auto;
+				padding: 30px;
+				border: 1px solid #eee;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+				font-size: 16px;
+				line-height: 24px;
+				font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+				color: #555;
+			}
 
-        }
-        caption, th, td {
+			.invoice-box table {
+				width: 100%;
+				line-height: inherit;
+				text-align: left;
+			}
 
-            padding: 8px;
+			.invoice-box table td {
+				padding: 5px;
+				vertical-align: top;
+			}
 
-        }
-    </style>
-    <title>Fourth Leaves Technologie</title>
-</head>
-<body>
-    <h1>Fourth Leaves Technologie</h1>
-    <h2>Facture</h2>
-    <h2>Numéro TVA CORP : FR78275</h2>
-    <h2>
-        <span th:text="'Contracteur : ' + ${contracteur}"></span>
-    </h2>
-    <table>
-        <caption>Facture n°54</caption>
-    <tr>
-        <th>Libelle</th>
-        <th>Prix</th>
-        <th>TVA</th>
-    </tr>
-    <tr>
-        <td>
-            <span th:text="${Libelle}"> </span>
-        </td>
-        <td>
-            <span th:text="${Prix}"> </span>
-        </td>
-        <td>20%</td>
-</table>
-</body>
+			.invoice-box table tr td:nth-child(2) {
+				text-align: right;
+			}
+
+			.invoice-box table tr.top table td {
+				padding-bottom: 20px;
+			}
+
+			.invoice-box table tr.top table td.title {
+				font-size: 45px;
+				line-height: 45px;
+				color: #333;
+			}
+
+			.invoice-box table tr.information table td {
+				padding-bottom: 40px;
+			}
+
+			.invoice-box table tr.heading td {
+				background: #eee;
+				border-bottom: 1px solid #ddd;
+				font-weight: bold;
+			}
+
+			.invoice-box table tr.details td {
+				padding-bottom: 20px;
+			}
+
+			.invoice-box table tr.item td {
+				border-bottom: 1px solid #eee;
+			}
+
+			.invoice-box table tr.item.last td {
+				border-bottom: none;
+			}
+
+			.invoice-box table tr.total td:nth-child(2) {
+				border-top: 2px solid #eee;
+				font-weight: bold;
+			}
+
+			@media only screen and (max-width: 600px) {
+				.invoice-box table tr.top table td {
+					width: 100%;
+					display: block;
+					text-align: center;
+				}
+
+				.invoice-box table tr.information table td {
+					width: 100%;
+					display: block;
+					text-align: center;
+				}
+			}
+
+			/** RTL **/
+			.invoice-box.rtl {
+				direction: rtl;
+				font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+			}
+
+			.invoice-box.rtl table {
+				text-align: right;
+			}
+
+			.invoice-box.rtl table tr td:nth-child(2) {
+				text-align: left;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="invoice-box">
+			<table cellpadding="0" cellspacing="0">
+				<tr class="top">
+					<td colspan="2">
+						<table>
+							<tr>
+								<td class="title">
+									<img src="https://static.wikia.nocookie.net/mahouka-koukou-no-rettousei/images/1/18/FLT_sign.png/revision/latest?cb=20140614005511" style="width: 100%; max-width: 300px" />
+								</td>
+
+								<td>
+									Invoice #: 123<br />
+									Created: January 1, 2015<br />
+									Due: February 1, 2015
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+
+				<tr class="information">
+					<td colspan="2">
+						<table>
+							<tr>
+								<td>
+									FTL<br />
+									2 Av de la Libération<br />
+									Plessis-Robinson, 92350
+								</td>
+
+								<td>
+									<span th:text="${contracteur}"></span>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+
+				<tr class="heading">
+					<td>Payment Method</td>
+
+					<td>Check #</td>
+				</tr>
+
+				<tr class="details">
+					<td>Check</td>
+
+					<td>1000</td>
+				</tr>
+
+				<tr class="heading">
+					<td>Item</td>
+
+					<td>Price</td>
+				</tr>
+
+				<tr class="item">
+					<td>
+						<span th:text="'$'+${Item}"></span>
+					</td>
+					<td>
+						<span th:text="'$'+${Price}"></span>
+					</td>
+				</tr>
+				<tr class="total">
+					<td></td>
+
+					<td>
+						<span th:text="'$'+${Price}"></span>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</body>
 </html>
