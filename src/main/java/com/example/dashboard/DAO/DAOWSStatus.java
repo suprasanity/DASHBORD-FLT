@@ -37,7 +37,7 @@ public class DAOWSStatus  {
         em.persist(webService);
         }
     @Transactional
-    public List getAll() {
+    public List<WebService> getAll() {
         return em.createQuery("SELECT w FROM WebService w").getResultList();
     }
     @Transactional

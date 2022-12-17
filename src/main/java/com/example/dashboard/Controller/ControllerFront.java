@@ -26,10 +26,6 @@ public class ControllerFront {
     @PostMapping("/botMsg")
     @ResponseBody
     public String sendMsg(@RequestBody String msg){
-        List l=new ArrayList();
-        l.add(new File("C:/Users/yann/Desktop/bazar/PPP_Y.Jeanmaire-dit-cartier_2021_corrige/Stage_Y.Jeanmaire-dit-cartier_2021.pdf"));
-
-
         bot.sendMsg(msg,"812813246499127296","1045799117374365716");
         return "true";
     }
