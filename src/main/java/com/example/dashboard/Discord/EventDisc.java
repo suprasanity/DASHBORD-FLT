@@ -38,7 +38,7 @@ public class EventDisc implements EventListener {
         try {
             gestionMessage(event);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+           logger.error(e.getMessage());
         }
 
     }

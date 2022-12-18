@@ -7,7 +7,7 @@ public class Information {
     private String url;
 
 
-    public Information(String url, String status) {
+    public Information(String url) {
         this.url = url;
 
     }

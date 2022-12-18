@@ -21,8 +21,8 @@ public class WebsiteApplication {
 
     public static boolean log = false;
 
-    public static String token = null;//NO SONAR
-    public static String numChange = null;//NO SONAR
+    public static String token = null;
+    public static String numChange = null;
 
 @Autowired
     Bot bot;

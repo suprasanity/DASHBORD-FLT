@@ -1,8 +1,9 @@
 package com.example.dashboard.service;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -16,9 +17,10 @@ import com.itextpdf.html2pdf.HtmlConverter;
 public class Facturation {
     @Autowired
     TemplateEngine templateEngine;
-    private  String factureName;
 
-    public String fileOutputPath="/home/pi/Deploiment/facture/";
+    public final String fileOutputPath="/home/pi/Deploiment/facture/";
+
+    public final Logger logger = LoggerFactory.getLogger(Facturation.class);
 
     @Autowired
     public Facturation(TemplateEngine templateEngine)  {
@@ -39,6 +41,10 @@ public class Facturation {
         writer.print(s);
         writer.close();
         HtmlConverter.convertToPdf(f,new File(fileOutputPath+contracteur+num+".pdf"));
-        f.delete();
+        if (f.delete()) {
+            logger.info("File deleted successfully");
+        } else {
+            logger.error("Failed to delete the file");
+        }
     }
 }

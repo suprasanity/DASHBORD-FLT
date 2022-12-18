@@ -28,7 +28,7 @@ public void init(){
     try{
         this.jda= JDABuilder.createDefault(WebsiteApplication.token).addEventListeners(eventDisc).enableIntents(GatewayIntent.MESSAGE_CONTENT).build();
         this.jda.awaitReady();
-    }catch (Exception ex){
+    }catch (InterruptedException ex){
         logger.error(ex.getMessage());
         this.sendMsg(ex.getMessage() ,"812813246499127296","1045799117374365716");
     }
