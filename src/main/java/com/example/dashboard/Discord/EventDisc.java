@@ -64,6 +64,7 @@ public class EventDisc implements EventListener {
                 mail.send(messageReceivedEvent.getMessage().getContentRaw().split(" ")[4],"test","test", f);
             }
             if (messageReceivedEvent.getMessage().getContentRaw().startsWith("!gideon")) {
+                messageReceivedEvent.getChannel().sendMessage("gideon Refléchit ").queue();
                 messageReceivedEvent.getChannel().sendMessage( chatgpt.ask(messageReceivedEvent.getMessage().getContentRaw().split(" ")[1])).queue();
 
             }
