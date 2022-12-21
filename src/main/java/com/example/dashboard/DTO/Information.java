@@ -1,12 +1,13 @@
 package com.example.dashboard.DTO;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonRawValue;
 
 public class Information {
     @JsonRawValue
     private String url;
 
-
+    @JsonCreator
     public Information(String url) {
         this.url = url;
 
