@@ -1,6 +1,7 @@
 package com.example.dashboard.Discord;
 
 import com.example.dashboard.WebsiteApplication;
+import com.example.dashboard.service.Chatgpt;
 import com.example.dashboard.service.Facturation;
 import com.example.dashboard.service.Mail;
 import net.dv8tion.jda.api.events.GenericEvent;
@@ -19,6 +20,8 @@ import java.io.IOException;
 
 @Service
 public class EventDisc implements EventListener {
+    @Autowired
+    Chatgpt chatgpt;
 
     @Autowired
     Facturation facturation;
@@ -59,6 +62,10 @@ public class EventDisc implements EventListener {
                 FileUpload fileUpload = FileUpload.fromData(f);
                 messageReceivedEvent.getChannel().sendMessage("Facture").addFiles(fileUpload).queue();
                 mail.send(messageReceivedEvent.getMessage().getContentRaw().split(" ")[4],"test","test", f);
+            }
+            if (messageReceivedEvent.getMessage().getContentRaw().startsWith("!gideon")) {
+                messageReceivedEvent.getChannel().sendMessage( chatgpt.ask(messageReceivedEvent.getMessage().getContentRaw().split(" ")[1])).queue();
+
             }
             if (messageReceivedEvent.getMessage().getContentRaw().equals("!log")) {
                if (WebsiteApplication.log) {
