@@ -50,7 +50,7 @@ Mail mail;
              }
                 if(!( list.get(i)).getStatus().equals("200") && log)
                 {
-                    bot.sendMsg("Le service "+( list.get(i)).getUrl()+" est KO son code erreur est " + ( list.get(i)).getStatus(),"812813246499127296","1045799117374365716");
+                    bot.sendMsg("Le service "+( list.get(i)).getUrl()+" est KO son code erreur est " + ( list.get(i)).getStatus(),"779369141948776498","1049799594076291093");
                 }
           }
 

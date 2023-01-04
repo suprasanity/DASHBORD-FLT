@@ -2,14 +2,20 @@
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
+e
+5src/main/java/com/example/dashboard/service/Mail.java,a\9\a960dca88451d8bd1d1ca5157c020a88622852c4
 Z
 *src/main/resources/templates/template.html,1\f\1f523324296352d594c7baa26fbd8dd593617177
+h
+8src/main/java/com/example/dashboard/DTO/Information.java,2\8\286dfb7d713041380d1f985af2e389e914cc6eff
 Ä
 “src/main/resources/frontendDashboard/test/.angular/cache/15.0.0/babel-webpack/973111d39e2c57cea125ca893bd12c2a45b945c168d1056d2140e9b04a5e23c6.json,b\3\b392159d90d205184401a7b1887a104be890fcc0
 b
 2src/main/resources/public/main.5eb93ec4e5996764.js,6\3\63b243675c26a43332f5fcda9ba66f5836b68942
 h
 8src/main/java/com/example/dashboard/DAO/DAOWSStatus.java,9\9\99df294fbf5ce56740009a6efaa5ac7a4a110fbd
+i
+9src/main/java/com/example/dashboard/model/WebService.java,f\6\f6766e42252f233e3f115903acbf47ca6e035323
 g
 7src/main/resources/public/polyfills.876e31297ea49908.js,d\7\d73dfb7516c2a1d148e747259ee4592e3897810c
 e
@@ -1010,6 +1016,10 @@ g
 “src/main/resources/frontendDashboard/test/.angular/cache/15.0.0/babel-webpack/742c87503d06903a80774ebcc0f34cfdebe433a5a02435246435cde3bcbf3525.json,7\3\738a14aef1f18505838e931416bfd5b4cdaec0f5
 Ä
 “src/main/resources/frontendDashboard/test/.angular/cache/15.0.0/babel-webpack/86a5a430db2ead93e8d15916b9b1e44741f57fb35d12490d60ee001c26b1a495.json,6\f\6f12a98f49b3baf6f1923f7b44de46a864a243fa
+s
+Csrc/main/java/com/example/dashboard/Controller/ControllerFront.java,4\6\46914f32bde10989f775e3dc421b4700faa19aac
+d
+4src/main/java/com/example/dashboard/Discord/Bot.java,b\8\b86370fc2041edecff48d02090a29ffda26e0303
 4
 mvnw,5\d\5d837c4ed85ecaaf932c506e80ff5d7b9f3d590d
 8
@@ -1018,6 +1028,8 @@ g
 HELP.md,1\a\1a273f73b7a477b0745593641bd708a6182c7ad5
 U
 %.mvn/wrapper/maven-wrapper.properties,3\2\32e074f71d16c1e88ac02aa83592ca6ad1fd98a8
+Y
+)src/main/resources/application.properties,0\6\06f65155ec73600b9fc5c4dc2883d4bb84d8e284
 Ä
 “src/main/resources/frontendDashboard/test/.angular/cache/15.0.0/babel-webpack/0d6592957150c88180645cf0d139da84e0502f396e20d28a8fde8f9b58a3f316.json,f\4\f45885b8abb00b2f56fba56684bde0409c8cd74f
 Ä

@@ -4,6 +4,7 @@ import com.example.dashboard.WebsiteApplication;
 import com.example.dashboard.service.Chatgpt;
 import com.example.dashboard.service.Facturation;
 import com.example.dashboard.service.Mail;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
@@ -40,13 +41,13 @@ public class EventDisc implements EventListener {
     public void onEvent(GenericEvent event) {
         try {
             gestionMessage(event);
-        } catch (IOException e) {
+        } catch (IOException | UnirestException e) {
            logger.error(e.getMessage());
         }
 
     }
 
-    private void gestionMessage(GenericEvent event) throws IOException {
+    private void gestionMessage(GenericEvent event) throws IOException, UnirestException {
         if (event instanceof MessageReceivedEvent) {
             MessageReceivedEvent messageReceivedEvent = (MessageReceivedEvent) event;
             if (messageReceivedEvent.getAuthor().isBot()) {
@@ -65,8 +66,13 @@ public class EventDisc implements EventListener {
             }
             if (messageReceivedEvent.getMessage().getContentRaw().startsWith("!gideon")) {
                 messageReceivedEvent.getChannel().sendMessage("gideon Refléchit ").queue();
-                messageReceivedEvent.getChannel().sendMessage( chatgpt.ask(messageReceivedEvent.getMessage().getContentRaw().split(" ")[1])).queue();
-
+               String reponse = chatgpt.ask(getSecondPart( messageReceivedEvent.getMessage().getContentRaw()));
+                String[] lines = reponse.split("\n");
+                for (String line : lines) {
+                    if (!line.equals("")){
+                        messageReceivedEvent.getChannel().sendMessage(line).queue();
+                    }
+                }
             }
             if (messageReceivedEvent.getMessage().getContentRaw().equals("!log")) {
                if (WebsiteApplication.log) {
@@ -79,6 +85,15 @@ public class EventDisc implements EventListener {
                }
             }
          }
+    }
+    public String getSecondPart(String phrase) {
+        // Utilisez la méthode split() de la classe String pour diviser la phrase en mots
+        String[] words = phrase.split(" ");
+        if (words.length < 2) {
+            return "";  // Si la phrase ne contient qu'un seul mot, renvoyez une chaîne vide
+        }
+        // Utilisez la méthode substring() de la classe String pour extraire la seconde partie de la phrase
+        return phrase.substring(words[0].length() + 1);
     }
 
 }
