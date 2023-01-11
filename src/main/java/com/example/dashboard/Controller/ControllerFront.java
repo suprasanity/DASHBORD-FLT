@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 @RestController
@@ -59,15 +59,21 @@ public class ControllerFront {
     }
     @GetMapping("StartMc")
     @ResponseBody
-    public String startMc() {
+    public String startMc() throws InterruptedException {
         try {
-            //todo remove deprecated
-            p = Runtime.getRuntime().exec("java -jar D:\\workspace\\dashboard\\dashboard\\target\\website-0.0.1-SNAPSHOT.jar");
 
-        }catch (IOException e){
+            ProcessBuilder pb = new ProcessBuilder("C:\\Program Files\\Java\\jdk-1.8.0_202\\bin\\java" ,"-server" ,"-Xms10000m", "-Xmx10000m","-XX:+UseG1GC", "-Dsun.rmi.dgc.server.gcInterval=2147483646", "-XX:+UnlockExperimentalVMOptions", "-XX:G1NewSizePercent=20", "-XX:G1ReservePercent=20" ,"-XX:MaxGCPauseMillis=50", "-XX:G1HeapRegionSize=32M", "-Dfml.readTimeout=180", "-jar","forge-1.12.2-14.23.5.2860.jar", "nogui");
+            pb.directory(new File("C:/Users/yann/Desktop/mc/mcMod"));
+            pb.environment();
+            logger.info("Starting minecraft");
+            pb.inheritIO();
+            p= pb.start();
+        }catch (Exception e){
             this.logger.error(e.getMessage());
             return "Une erreur à été rencontrer durant le démarage du serveur. : "+e.getMessage();
         }
+        p.waitFor();
+        logger.error(p.exitValue()+"");
         return "true";
     }
     @GetMapping("StopMc")
