@@ -41,6 +41,7 @@ public class Facturation {
         writer.print(s);
         writer.close();
         HtmlConverter.convertToPdf(f,new File(fileOutputPath+contracteur+num+".pdf"));
+        //todo use java nio
         if (f.delete()) {
             logger.info("File deleted successfully");
         } else {

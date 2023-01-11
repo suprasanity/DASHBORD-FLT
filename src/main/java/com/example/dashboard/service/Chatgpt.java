@@ -7,9 +7,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 @Component
 public class Chatgpt {
-    public final static String URL = "https://api.openai.com/v1/completions";
-    public final String bearer="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";//your token here
-    public final String model="text-davinci-edit-001";//your model here
+    public static final  String URL = "https://api.openai.com/v1/completions";
+    public static final String bearer="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";//your token here
+    public static final String model="text-davinci-edit-001";//your model here
 
 
 
