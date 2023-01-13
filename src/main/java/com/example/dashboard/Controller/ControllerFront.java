@@ -3,6 +3,7 @@ package com.example.dashboard.Controller;
 import com.example.dashboard.DTO.Information;
 import com.example.dashboard.Discord.Bot;
 import com.example.dashboard.model.WebService;
+import com.example.dashboard.service.ServiceUser;
 import com.example.dashboard.service.ServiceWSStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,8 @@ import java.util.List;
 public class ControllerFront {
 
     Process p;
+    @Autowired
+    ServiceUser serviceUser;
 
    private Logger logger =org.slf4j.LoggerFactory.getLogger(ControllerFront.class);
     @Autowired
@@ -94,4 +97,17 @@ public class ControllerFront {
         return serviceWSStatus.getWS(Long.parseLong(id.substring(3)));
     }
 
+
+    @PostMapping("login")
+    @ResponseBody
+    public boolean isLogged(@RequestBody String login , @RequestBody String password) {
+        this.logger.info(serviceUser.isLogged(login,password)+"");
+        return serviceUser.isLogged(login,password);
+    }
+
+    @PostMapping("register")
+    @ResponseBody
+    public boolean register(@RequestBody String login , @RequestBody String password, @RequestBody String email, @RequestBody String tel) {
+        return serviceUser.register(login,password,email,tel);
+    }
 }
