@@ -35,4 +35,8 @@ public  class ServiceWSStatus {
     public void updateStatus(Long id, String down) {
         daoWSStatus.updateStatus(id,down);
     }
+
+    public String getWSStatudByName(String name) {
+        return daoWSStatus.getWSStatusByName(name);
+    }
 }

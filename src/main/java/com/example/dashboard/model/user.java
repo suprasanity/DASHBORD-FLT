@@ -3,11 +3,11 @@ package com.example.dashboard.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="user")
+@Table(name="users")
 public class user {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long user_id;
 
     @Column(name="username")
     private String username;
@@ -15,7 +15,7 @@ public class user {
     @Column(name="password")
     private String password;
 
-    @Column(name="email")
+    @Column(name="mail")
     private String email;
 
     @Column(name="tel")
@@ -23,11 +23,11 @@ public class user {
 
 
     public Long getId() {
-        return id;
+        return user_id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.user_id = id;
     }
 
     public String getUsername() {

@@ -58,5 +58,10 @@ public class DAOWSStatus  {
     public void updateStatus(Long id, String down) {
         em.createQuery("UPDATE WebService w SET w.status = :status WHERE w.id = :id").setParameter("id", id).setParameter("status", down).executeUpdate();
     }
+    @Transactional
+
+    public String getWSStatusByName(String name) {
+        return (String) em.createQuery("SELECT w.status FROM WebService w WHERE w.url = :name").setParameter("name", name).getSingleResult();
+    }
 }
 

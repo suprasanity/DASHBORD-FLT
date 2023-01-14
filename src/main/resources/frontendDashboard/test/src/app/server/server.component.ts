@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AuthService} from "../auth.service";
 
 @Component({
   selector: 'app-server',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class ServerComponent {
 
+  constructor(private authService : AuthService) {}
+
+  startServer() {
+    this.authService.startServer();
+  }
+  stopServer() {
+    this.authService.stopServer();
+  }
 }

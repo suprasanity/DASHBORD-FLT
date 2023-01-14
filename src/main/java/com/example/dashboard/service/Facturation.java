@@ -18,7 +18,7 @@ public class Facturation {
     @Autowired
     TemplateEngine templateEngine;
 
-    public final String fileOutputPath="/home/pi/Deploiment/facture/";
+    public final String fileOutputPath="C:\\Users\\yann\\Desktop";
 
     public final Logger logger = LoggerFactory.getLogger(Facturation.class);
 
@@ -41,7 +41,6 @@ public class Facturation {
         writer.print(s);
         writer.close();
         HtmlConverter.convertToPdf(f,new File(fileOutputPath+contracteur+num+".pdf"));
-        //todo use java nio
         if (f.delete()) {
             logger.info("File deleted successfully");
         } else {

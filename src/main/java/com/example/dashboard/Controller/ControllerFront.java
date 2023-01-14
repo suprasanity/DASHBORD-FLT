@@ -1,5 +1,6 @@
 package com.example.dashboard.Controller;
 
+import com.example.dashboard.DTO.DTOUser;
 import com.example.dashboard.DTO.Information;
 import com.example.dashboard.Discord.Bot;
 import com.example.dashboard.model.WebService;
@@ -60,10 +61,9 @@ public class ControllerFront {
     public String getStatus(@RequestBody String id){
         return serviceWSStatus.getStatus(Long.parseLong(id.substring(3)));
     }
-    @GetMapping("StartMc")
+    @GetMapping("/StartMc")
     @ResponseBody
-    public String startMc() throws InterruptedException {
-        try {
+    public String startMc() throws InterruptedException, IOException {
 
             ProcessBuilder pb = new ProcessBuilder("C:\\Program Files\\Java\\jdk-1.8.0_202\\bin\\java" ,"-server" ,"-Xms10000m", "-Xmx10000m","-XX:+UseG1GC", "-Dsun.rmi.dgc.server.gcInterval=2147483646", "-XX:+UnlockExperimentalVMOptions", "-XX:G1NewSizePercent=20", "-XX:G1ReservePercent=20" ,"-XX:MaxGCPauseMillis=50", "-XX:G1HeapRegionSize=32M", "-Dfml.readTimeout=180", "-jar","forge-1.12.2-14.23.5.2860.jar", "nogui");
             pb.directory(new File("C:/Users/yann/Desktop/mc/mcMod"));
@@ -71,15 +71,11 @@ public class ControllerFront {
             logger.info("Starting minecraft");
             pb.inheritIO();
             p= pb.start();
-        }catch (Exception e){
-            this.logger.error(e.getMessage());
-            return "Une erreur à été rencontrer durant le démarage du serveur. : "+e.getMessage();
-        }
-        p.waitFor();
-        logger.error(p.exitValue()+"");
+            p.waitFor();
+            logger.info("Minecraft started");
         return "true";
     }
-    @GetMapping("StopMc")
+    @GetMapping("/StopMc")
     @ResponseBody
     public String stopMc() {
         try {
@@ -98,16 +94,23 @@ public class ControllerFront {
     }
 
 
-    @PostMapping("login")
+    @PostMapping("/login")
     @ResponseBody
-    public boolean isLogged(@RequestBody String login , @RequestBody String password) {
-        this.logger.info(serviceUser.isLogged(login,password)+"");
-        return serviceUser.isLogged(login,password);
+    public boolean isLogged(@RequestBody DTOUser user) {
+        this.logger.info(serviceUser.isLogged(user.getLogin(),user.getPassword())+"");
+        return serviceUser.isLogged(user.getLogin(),user.getPassword());
     }
 
-    @PostMapping("register")
+    @PostMapping("/register")
     @ResponseBody
     public boolean register(@RequestBody String login , @RequestBody String password, @RequestBody String email, @RequestBody String tel) {
         return serviceUser.register(login,password,email,tel);
     }
+
+    @PostMapping("/getWSStatudByName")
+    @ResponseBody
+    public String getWSStatudByName(@RequestBody String name){
+        return serviceWSStatus.getWSStatudByName(name);
+    }
+
 }

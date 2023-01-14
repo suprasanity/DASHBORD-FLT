@@ -7,8 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.List;
 
 @Repository
@@ -29,7 +27,14 @@ public class DAOUser  {
     }
     @Transactional
     public user getUserByLogin(String login, String password) {
-        return (user) em.createQuery("SELECT u FROM user u WHERE u.username = :login AND u.password = :password").setParameter("login", login).setParameter("password", password).getSingleResult();
+        List<user> users = em.createQuery("select u from user u where u.username = :login and u.password = :password", user.class)
+                .setParameter("login", login)
+                .setParameter("password", password)
+                .getResultList();
+        if (users.isEmpty()) {
+            return null;
+        }
+        return users.get(0);
     }
 }
 
