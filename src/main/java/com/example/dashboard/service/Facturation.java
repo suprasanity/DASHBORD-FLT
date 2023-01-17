@@ -10,6 +10,8 @@ import org.thymeleaf.context.Context;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import com.itextpdf.html2pdf.HtmlConverter;
 
@@ -18,7 +20,7 @@ public class Facturation {
     @Autowired
     TemplateEngine templateEngine;
 
-    public final String fileOutputPath="C:\\Users\\yann\\Desktop";
+    public static final String fileOutputPath="C:\\Users\\yann\\Desktop";
 
     public final Logger logger = LoggerFactory.getLogger(Facturation.class);
 
@@ -41,9 +43,11 @@ public class Facturation {
         writer.print(s);
         writer.close();
         HtmlConverter.convertToPdf(f,new File(fileOutputPath+contracteur+num+".pdf"));
-        if (f.delete()) {
+        try{
+            Files.deleteIfExists(Paths.get(f.getAbsolutePath()));
             logger.info("File deleted successfully");
-        } else {
+        }catch (IOException e){
+            logger.error(e.getMessage());
             logger.error("Failed to delete the file");
         }
     }

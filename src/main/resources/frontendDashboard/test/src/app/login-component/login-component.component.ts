@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {AuthServiceService} from "../auth-service.service";
 @Component({
   selector: 'app-login-component',
@@ -6,8 +6,8 @@ import {AuthServiceService} from "../auth-service.service";
   styleUrls: ['./login-component.component.css']
 })
 export class LoginComponentComponent {
-  password: String ="";
-  login: String="";
+  password: string ="";
+  login: string="";
 
   constructor(private authService : AuthServiceService) { }
 

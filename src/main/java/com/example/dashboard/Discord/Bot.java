@@ -24,18 +24,12 @@ private  Logger logger = org.slf4j.LoggerFactory.getLogger(Bot.class);
 
 
 @PostConstruct
-public void init(){
-    try{
-        this.jda= JDABuilder.createDefault(WebsiteApplication.token).addEventListeners(eventDisc).enableIntents(GatewayIntent.MESSAGE_CONTENT).build();
+public void init() throws InterruptedException {
+
+        this.jda = JDABuilder.createDefault(WebsiteApplication.token).addEventListeners(eventDisc).enableIntents(GatewayIntent.MESSAGE_CONTENT).build();
         this.jda.awaitReady();
-    }catch (InterruptedException ex){
-        logger.error(ex.getMessage());
-        this.sendMsg(ex.getMessage() ,"812813246499127296","1045799117374365716");
-    }
+        logger.info("Bot discord Connected");
 }
-
-
-
 
     public void sendMsg(String test , String guildId, String channelId) {
     try{

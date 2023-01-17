@@ -40,13 +40,13 @@ public class EventDisc implements EventListener {
     public void onEvent(GenericEvent event) {
         try {
             gestionMessage(event);
-        } catch (IOException | UnirestException e) {
+        } catch (IOException e) {
            logger.error(e.getMessage());
         }
 
     }
 
-    private void gestionMessage(GenericEvent event) throws IOException, UnirestException {
+    private void gestionMessage(GenericEvent event) throws IOException {
         if (event instanceof MessageReceivedEvent) {
             MessageReceivedEvent messageReceivedEvent = (MessageReceivedEvent) event;
             if (messageReceivedEvent.getAuthor().isBot()) {
