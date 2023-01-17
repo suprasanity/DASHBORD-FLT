@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AuthService} from "../auth.service";
+import {AuthServiceService} from "../auth-service.service";
 
 @Component({
   selector: 'app-server',
@@ -8,7 +8,7 @@ import {AuthService} from "../auth.service";
 })
 export class ServerComponent {
 
-  constructor(private authService : AuthService) {}
+  constructor(private authService : AuthServiceService) {}
 
   startServer() {
     this.authService.startServer();
