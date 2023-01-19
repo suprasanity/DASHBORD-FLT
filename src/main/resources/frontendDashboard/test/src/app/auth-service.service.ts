@@ -20,13 +20,16 @@ export class AuthServiceService {
   this.http.get('http://localhost:80/StopMc').subscribe();
   }
 
-  login(data: { password: string; login: string })  {
+   async login(data: { password: string; login: string })  {
+
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
-    this.http.post('http://localhost:80/login', JSON.stringify(data), {headers}).subscribe(response => {
-      this.auth = Boolean (response);
-
-    });
-
+    try {
+      const response = await this.http.post('http://localhost:80/login', JSON.stringify(data), {headers}).toPromise();
+      return response;
+    }catch (e) {
+      console.log(e);
+    }
+    return null;
   }
 
   public getAuth() : boolean {

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {AuthServiceService} from "../auth-service.service";
+import {Router} from "@angular/router";
+
 @Component({
   selector: 'app-login-component',
   templateUrl: './login-component.component.html',
@@ -9,13 +11,23 @@ export class LoginComponentComponent {
   password: string ="";
   login: string="";
 
-  constructor(private authService : AuthServiceService) { }
+  constructor(private authService : AuthServiceService,private router:Router) { }
 
-  loginMethode() {
+   async loginMethode() {
     const data = {
       login: this.login,
       password: this.password
     }
-   this.authService.login(data);
-  };
+   try {
+      const response = await this.authService.login(data);
+      if (response) {
+        this.authService.auth = true;
+        await this.router.navigate(['/acceuil']);
+      }else {
+        alert("Wrong login or password");
+      }
+    }catch (e) {
+      console.log(e);
+    }
+   }
 }
