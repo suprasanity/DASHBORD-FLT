@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from "@angular/forms";
 import { AcceuilComponent } from './acceuil/acceuil.component';
 import { NgChartsModule } from 'ng2-charts';
-import { GraphMoneyComponent } from './graph-money/graph-money.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -18,16 +18,18 @@ import { GraphMoneyComponent } from './graph-money/graph-money.component';
     ServerComponent,
     NavbarComponent,
     AcceuilComponent,
-    GraphMoneyComponent
+    CalendarComponent,
+
+
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         FormsModule,
         HttpClientModule,
-        NgChartsModule
+        NgChartsModule,
     ],
   providers: [],
   bootstrap: [AppComponent]
-})  
+})
 export class AppModule { }

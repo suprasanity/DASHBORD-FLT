@@ -8,23 +8,27 @@ export class AuthServiceService {
   auth: boolean = false;
 
   constructor(private http: HttpClient) {
+
   }
 
   startServer() {
-    this.http.get('http://localhost:80/StartMc').subscribe();
+    this.http.get('https://chovy.freeboxos.fr/api/StartMc').subscribe();
   }
 
 
 
   stopServer() {
-  this.http.get('http://localhost:80/StopMc').subscribe();
+  this.http.get('https://chovy.freeboxos.fr/api/StopMc').subscribe();
   }
 
    async login(data: { password: string; login: string })  {
 
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin' : 'https://chovy.freeboxos.fr',
+      'Content-Type': 'application/json'
+    });
     try {
-      const response = await this.http.post('http://localhost:80/login', JSON.stringify(data), {headers}).toPromise();
+      const response = await this.http.post('https://chovy.freeboxos.fr/api/login', JSON.stringify(data), {headers}).toPromise();
       return response;
     }catch (e) {
       console.log(e);

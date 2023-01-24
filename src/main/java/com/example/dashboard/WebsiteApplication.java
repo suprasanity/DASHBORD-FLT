@@ -4,12 +4,15 @@ import com.example.dashboard.Discord.EventDisc;
 import com.example.dashboard.model.WebService;
 import com.example.dashboard.service.Mail;
 import com.example.dashboard.service.ServiceWSStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
@@ -28,7 +31,7 @@ public class WebsiteApplication {
     Bot bot;
 @Autowired
 ServiceWSStatus serviceWSStatus;
-
+private Logger logger = LoggerFactory.getLogger(this.getClass());
 @Autowired
 EventDisc eventDisc;
 
@@ -36,7 +39,8 @@ EventDisc eventDisc;
 Mail mail;
 
     @Scheduled(fixedRate = 1000*60)
-    public void run()  {
+    public void run() throws IOException {
+
         List <WebService>list = serviceWSStatus.getAllWS();
          for (int i = 0; i < list.size(); i++) {
              try{
@@ -55,6 +59,10 @@ Mail mail;
           }
 
     }
+
+
+
+
     public static void main(String[] args) {
         token = args[0];
         if(args.length>1)

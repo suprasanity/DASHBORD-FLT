@@ -14,7 +14,8 @@ import java.io.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "chovy.freeboxos.fr")
+@CrossOrigin(origins = "http://chovy.freeboxos.fr/signIn")
+@RequestMapping("/api")
 public class ControllerFront {
 
     Process p;
