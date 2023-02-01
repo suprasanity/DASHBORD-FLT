@@ -1,10 +1,10 @@
 package com.example.dashboard.Discord;
 
+
 import com.example.dashboard.WebsiteApplication;
 import com.example.dashboard.service.Chatgpt;
 import com.example.dashboard.service.Facturation;
 import com.example.dashboard.service.Mail;
-import com.mashape.unirest.http.exceptions.UnirestException;
 import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.EventListener;

@@ -1,0 +1,64 @@
+package com.example.dashboard.conf;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.ldap.core.LdapTemplate;
+import org.springframework.ldap.core.support.LdapContextSource;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.ldap.authentication.BindAuthenticator;
+import org.springframework.security.ldap.authentication.LdapAuthenticationProvider;
+import org.springframework.security.ldap.search.FilterBasedLdapUserSearch;
+
+@Configuration
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                .anyRequest().fullyAuthenticated()
+                .and()
+                .formLogin();
+    }
+
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .authenticationProvider(ldapAuthenticationProvider());
+    }
+
+    @Bean
+    public LdapContextSource contextSource() {
+        LdapContextSource contextSource = new LdapContextSource();
+        contextSource.setUrl("ldap://192.168.1.10");
+        contextSource.setBase("dc=chovy,dc=freeboxos,dc=fr");
+        contextSource.setUserDn("cn=admin,dc=chovy,dc=freeboxos,dc=fr");
+        contextSource.setPassword("yann");
+        return contextSource;
+    }
+
+    @Bean
+    public LdapTemplate ldapTemplate() {
+        return new LdapTemplate(contextSource());
+    }
+
+    @Bean
+    public BindAuthenticator bindAuthenticator() {
+        BindAuthenticator authenticator = new BindAuthenticator(contextSource());
+        authenticator.setUserSearch(userSearch());
+        return authenticator;
+    }
+
+    @Bean
+    public FilterBasedLdapUserSearch userSearch() {
+        return  new FilterBasedLdapUserSearch("ou=people", "(uid={0})", contextSource());
+    }
+
+    @Bean
+    public LdapAuthenticationProvider ldapAuthenticationProvider() {
+        LdapAuthenticationProvider authenticationProvider = new LdapAuthenticationProvider(bindAuthenticator());
+        return authenticationProvider;
+    }
+}

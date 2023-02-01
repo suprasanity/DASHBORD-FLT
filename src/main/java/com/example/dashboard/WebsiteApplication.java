@@ -1,4 +1,5 @@
 package com.example.dashboard;
+
 import com.example.dashboard.Discord.Bot;
 import com.example.dashboard.Discord.EventDisc;
 import com.example.dashboard.model.WebService;
@@ -9,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -20,12 +23,13 @@ import java.util.List;
 @SpringBootApplication
 @EnableScheduling
 
-public class WebsiteApplication {
+public class WebsiteApplication  extends SpringBootServletInitializer {
 
     public static boolean log = false;
 
     public static String token = null;
     public static String numChange = null;
+
 
 @Autowired
     Bot bot;
@@ -70,11 +74,5 @@ Mail mail;
              numChange = args[1];
         }
         SpringApplication.run(WebsiteApplication.class, args);
-
-
-
-
-
     }
-
 }
