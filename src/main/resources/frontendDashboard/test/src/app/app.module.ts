@@ -10,6 +10,7 @@ import {FormsModule} from "@angular/forms";
 import { AcceuilComponent } from './acceuil/acceuil.component';
 import { NgChartsModule } from 'ng2-charts';
 import { CalendarComponent } from './calendar/calendar.component';
+import { WebserviceComponent } from './webservice/webservice.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CalendarComponent } from './calendar/calendar.component';
     NavbarComponent,
     AcceuilComponent,
     CalendarComponent,
+    WebserviceComponent,
 
 
   ],

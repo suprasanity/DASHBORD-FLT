@@ -1,0 +1,12 @@
+
+<h1>Voici les Service en base </h1>
+<!---
+//todo add two button in order to allow adding and deleting
+-->
+<ul>
+  <li *ngFor="let ws of w; let index = index;">
+    <span>Id : {{ ws.id }}</span>
+    <span>Status : {{ ws.status }}</span>
+    <span>Url {{ ws.url }}</span>
+  </li>
+</ul>

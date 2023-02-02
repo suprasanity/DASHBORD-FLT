@@ -99,7 +99,7 @@ public class ControllerFront {
     @ResponseBody
     public boolean isLogged(@RequestBody DTOUser user) {
 
-        this.logger.info( serviceUser.isLogged(user.getLogin(),user.getPassword()).toString());
+        this.logger.info(serviceUser.isLogged(user.getLogin(),user.getPassword()).toString());
         return serviceUser.isLogged(user.getLogin(),user.getPassword());
     }
 

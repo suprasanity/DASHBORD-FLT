@@ -16,23 +16,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http.csrf().disable()
                 .authorizeRequests()
-                .anyRequest().fullyAuthenticated()
+                .antMatchers("/api/*").fullyAuthenticated()
                 .and()
-                .formLogin();
+                .httpBasic()
+
+        ;
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .authenticationProvider(ldapAuthenticationProvider());
+
     }
 
     @Bean
     public LdapContextSource contextSource() {
         LdapContextSource contextSource = new LdapContextSource();
-        contextSource.setUrl("ldap://192.168.1.10");
+        contextSource.setUrl("ldap://chovy.freeboxos.fr");
         contextSource.setBase("dc=chovy,dc=freeboxos,dc=fr");
         contextSource.setUserDn("cn=admin,dc=chovy,dc=freeboxos,dc=fr");
         contextSource.setPassword("yann");
@@ -58,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public LdapAuthenticationProvider ldapAuthenticationProvider() {
-        LdapAuthenticationProvider authenticationProvider = new LdapAuthenticationProvider(bindAuthenticator());
-        return authenticationProvider;
+        return new LdapAuthenticationProvider(bindAuthenticator());
+
     }
 }

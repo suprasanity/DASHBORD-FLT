@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {map, Observable} from "rxjs";
+import {Webservice} from "./webservice";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthServiceService {
   auth: boolean = false;
+  basicAuthHeader = 'Basic ' + btoa( "john:admin");
 
   constructor(private http: HttpClient) {
 
@@ -22,13 +25,13 @@ export class AuthServiceService {
   }
 
    async login(data: { password: string; login: string })  {
-
     const headers = new HttpHeaders({
-      'Access-Control-Allow-Origin' : 'https://chovy.freeboxos.fr',
-      'Content-Type': 'application/json'
+      'Access-Control-Allow-Origin' : 'http://localhost',
+      'Content-Type': 'application/json',
+      'Authorization': this.basicAuthHeader
     });
     try {
-      const response = await this.http.post('https://chovy.freeboxos.fr/api/login', JSON.stringify(data), {headers}).toPromise();
+      const response = await this.http.post('http://localhost/api/login', JSON.stringify(data), {headers}).toPromise();
       return response;
     }catch (e) {
       console.log(e);
@@ -38,5 +41,18 @@ export class AuthServiceService {
 
   public getAuth() : boolean {
     return this.auth;
+  }
+
+   getAllws() : Observable<Webservice[]> {
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin' : 'localhost',
+      'Content-Type': 'application/json',
+      'Authorization': this.basicAuthHeader
+
+    })
+
+
+    return this.http.get<Webservice[]>('http://localhost/api/getAllService', {headers} );
+
   }
 }
