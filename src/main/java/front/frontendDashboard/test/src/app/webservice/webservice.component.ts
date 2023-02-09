@@ -20,7 +20,20 @@ export class WebserviceComponent implements OnInit{
     })
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void { // Lifecycle hook
     this.getWs()
+  }
+
+  async del(idp:number) {
+    const data = {
+      'id': idp
+    }
+
+    try {
+      const response = await this.authService.delWs(data);
+      this.w=[];
+    }catch (e) {
+      console.log(e);
+    }
   }
 }

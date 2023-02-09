@@ -7,4 +7,6 @@
 /.idea/libraries/
 /.idea/libraries/
 /target/
+/src/main/java/front/frontendDashboard/test/node_modules/*
+/src/main/java/front/frontendDashboard/test/.angular/*
 C:/Users/yann/IdeaProjects/DASHBORD-FLT/src/main/resources/frontendDashboard/test/node_modules/*

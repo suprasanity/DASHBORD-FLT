@@ -117,7 +117,7 @@
                 </executions>
                 <configuration>
                     <executable>ng</executable>
-                    <workingDirectory>src/main/resources/frontendDashboard/test</workingDirectory>
+                    <workingDirectory>src/main/java/front/frontendDashboard/test</workingDirectory>
                     <arguments>
                         <argument>build</argument>
                     </arguments>
