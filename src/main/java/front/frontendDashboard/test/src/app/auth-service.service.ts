@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {map, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {Webservice} from "./webservice";
 
 @Injectable({
@@ -15,18 +15,32 @@ export class AuthServiceService {
   }
 
   startServer() {
-    this.http.get('https://chovy.freeboxos.fr/api/StartMc').subscribe();
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin' : '*',
+      'Content-Type': 'application/json',
+      'Authorization': this.basicAuthHeader
+
+    })
+
+    this.http.get('http://localhost/api/StartMc',{headers}).subscribe();
   }
 
 
 
   stopServer() {
-  this.http.get('https://chovy.freeboxos.fr/api/StopMc').subscribe();
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin' : '*',
+      'Content-Type': 'application/json',
+      'Authorization': this.basicAuthHeader
+
+    })
+
+    this.http.get('http://localhost/api/StopMc',{headers}).subscribe();
   }
 
    async login(data: { password: string; login: string })  {
     const headers = new HttpHeaders({
-      'Access-Control-Allow-Origin' : 'http://localhost',
+      'Access-Control-Allow-Origin' : '*',
       'Content-Type': 'application/json',
       'Authorization': this.basicAuthHeader
     });
@@ -45,7 +59,7 @@ export class AuthServiceService {
 
    getAllws() : Observable<Webservice[]> {
     const headers = new HttpHeaders({
-      'Access-Control-Allow-Origin' : 'localhost',
+      'Access-Control-Allow-Origin' : '*',
       'Content-Type': 'application/json',
       'Authorization': this.basicAuthHeader
 
@@ -55,4 +69,21 @@ export class AuthServiceService {
     return this.http.get<Webservice[]>('http://localhost/api/getAllService', {headers} );
 
   }
+
+  async delWs(data: { id: number })  {
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin' : '*',
+      'Content-Type': 'application/json',
+      'Authorization': this.basicAuthHeader
+    });
+
+    try {
+      const response = await this.http.post('http://localhost/api/deleteService', data.id, {headers}).toPromise();
+      return response;
+    }catch (e) {
+      console.log(e);
+    }
+    return null;
+  }
+
 }

@@ -1,4 +1,4 @@
-package com.example.dashboard.DAO;
+package com.example.dashboard.dao;
 
 
 import com.example.dashboard.model.User;

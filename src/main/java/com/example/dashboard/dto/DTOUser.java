@@ -1,4 +1,4 @@
-package com.example.dashboard.DTO;
+package com.example.dashboard.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonRawValue;

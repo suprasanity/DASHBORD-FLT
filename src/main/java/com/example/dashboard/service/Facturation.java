@@ -4,6 +4,7 @@ package com.example.dashboard.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -19,8 +20,8 @@ import com.itextpdf.html2pdf.HtmlConverter;
 public class Facturation {
     @Autowired
     TemplateEngine templateEngine;
-
-    public static final String fileOutputPath="C:\\Users\\yann\\Desktop";
+    @Value("${path.facture}")
+    public String fileOutputPath;
 
     public final Logger logger = LoggerFactory.getLogger(Facturation.class);
 
@@ -38,11 +39,11 @@ public class Facturation {
         ctx.setVariable("Price", prix);
 
         String s=templateEngine.process("template",ctx);
-        File f = new File(fileOutputPath+contracteur+num+".html");
-        PrintWriter writer = new PrintWriter(fileOutputPath+contracteur+num+".html", "UTF-8");
+        File f = new File(fileOutputPath +contracteur+num+".html");
+        PrintWriter writer = new PrintWriter(fileOutputPath +contracteur+num+".html", "UTF-8");
         writer.print(s);
         writer.close();
-        HtmlConverter.convertToPdf(f,new File(fileOutputPath+contracteur+num+".pdf"));
+        HtmlConverter.convertToPdf(f,new File(fileOutputPath +contracteur+num+".pdf"));
         try{
             Files.deleteIfExists(Paths.get(f.getAbsolutePath()));
             logger.info("File deleted successfully");

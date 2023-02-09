@@ -1,4 +1,4 @@
-package com.example.dashboard.Discord;
+package com.example.dashboard.discord;
 
 
 

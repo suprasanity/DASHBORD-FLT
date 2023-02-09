@@ -1,16 +1,14 @@
 package com.example.dashboard;
 
-import com.example.dashboard.Discord.Bot;
-import com.example.dashboard.Discord.EventDisc;
+import com.example.dashboard.discord.Bot;
+import com.example.dashboard.discord.EventDisc;
 import com.example.dashboard.model.WebService;
 import com.example.dashboard.service.Mail;
 import com.example.dashboard.service.ServiceWSStatus;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -35,7 +33,6 @@ public class WebsiteApplication  extends SpringBootServletInitializer {
     Bot bot;
 @Autowired
 ServiceWSStatus serviceWSStatus;
-private Logger logger = LoggerFactory.getLogger(this.getClass());
 @Autowired
 EventDisc eventDisc;
 

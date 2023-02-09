@@ -30,7 +30,7 @@ export class WebserviceComponent implements OnInit{
     }
 
     try {
-      const response = await this.authService.delWs(data);
+        await this.authService.delWs(data);
       this.w=[];
     }catch (e) {
       console.log(e);

@@ -11,6 +11,11 @@ import { AcceuilComponent } from './acceuil/acceuil.component';
 import { NgChartsModule } from 'ng2-charts';
 import { CalendarComponent } from './calendar/calendar.component';
 import { WebserviceComponent } from './webservice/webservice.component';
+import { MatCardModule } from '@angular/material/card';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import {MatDividerModule} from '@angular/material/divider';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +35,10 @@ import { WebserviceComponent } from './webservice/webservice.component';
         FormsModule,
         HttpClientModule,
         NgChartsModule,
+        MatCardModule,
+        BrowserAnimationsModule,
+        MatDividerModule,
+       MatProgressBarModule,
     ],
   providers: [],
   bootstrap: [AppComponent]

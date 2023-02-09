@@ -10,9 +10,32 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.ldap.authentication.BindAuthenticator;
 import org.springframework.security.ldap.authentication.LdapAuthenticationProvider;
 import org.springframework.security.ldap.search.FilterBasedLdapUserSearch;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource()
+    {
+        List<String> list = new ArrayList<>();
+        list.add("http://chovy.freeboxos.fr");
+        list.add("http://localhost");
+
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(list);
+        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

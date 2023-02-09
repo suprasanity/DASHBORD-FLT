@@ -1,12 +1,13 @@
-package com.example.dashboard.Controller;
+package com.example.dashboard.controller;
 
-import com.example.dashboard.DTO.DTOUser;
-import com.example.dashboard.DTO.Information;
-import com.example.dashboard.Discord.Bot;
+import com.example.dashboard.dto.DTOUser;
+import com.example.dashboard.dto.Information;
+import com.example.dashboard.discord.Bot;
 import com.example.dashboard.model.WebService;
 import com.example.dashboard.service.ServiceUser;
 import com.example.dashboard.service.ServiceWSStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 
@@ -14,10 +15,11 @@ import java.io.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://chovy.freeboxos.fr/signIn")
+@CrossOrigin(origins ="*", allowedHeaders = "*")
 @RequestMapping("/api")
 public class ControllerFront {
-
+    @Value("${path.mc}")
+    private String pathname;
     Process p;
     @Autowired
     ServiceUser serviceUser;
@@ -50,11 +52,11 @@ public class ControllerFront {
     public List <WebService> getAllService(){
         return serviceWSStatus.getAllWS();
     }
+
+
     @PostMapping("/deleteService")
-    @ResponseBody
-    public String deleteService(@RequestBody String id){
-        serviceWSStatus.deleteWS(Long.parseLong(id.substring(3)));
-        return "true";
+    public void deleteService(@RequestBody String id){
+        serviceWSStatus.deleteWS(Long.parseLong(id));
     }
 
    @PostMapping("/getStatus")
@@ -66,8 +68,8 @@ public class ControllerFront {
     @ResponseBody
     public String startMc() throws InterruptedException, IOException {
 
-            ProcessBuilder pb = new ProcessBuilder("C:\\Program Files\\Java\\jdk-1.8.0_202\\bin\\java" ,"-server" ,"-Xms10000m", "-Xmx10000m","-XX:+UseG1GC", "-Dsun.rmi.dgc.server.gcInterval=2147483646", "-XX:+UnlockExperimentalVMOptions", "-XX:G1NewSizePercent=20", "-XX:G1ReservePercent=20" ,"-XX:MaxGCPauseMillis=50", "-XX:G1HeapRegionSize=32M", "-Dfml.readTimeout=180", "-jar","forge-1.12.2-14.23.5.2860.jar", "nogui");
-            pb.directory(new File("C:\\Users\\yann\\Desktop\\mc\\mcMod"));
+            ProcessBuilder pb = new ProcessBuilder("C:/Program Files/Java/jdk-1.8.0_202/bin/java" ,"-server" ,"-Xms10000m", "-Xmx10000m","-XX:+UseG1GC", "-Dsun.rmi.dgc.server.gcInterval=2147483646", "-XX:+UnlockExperimentalVMOptions", "-XX:G1NewSizePercent=20", "-XX:G1ReservePercent=20" ,"-XX:MaxGCPauseMillis=50", "-XX:G1HeapRegionSize=32M", "-Dfml.readTimeout=180", "-jar","forge-1.12.2-14.23.5.2860.jar", "nogui");
+            pb.directory(new File(pathname));
             pb.environment();
             logger.info("Starting minecraft");
             pb.inheritIO();
@@ -98,8 +100,6 @@ public class ControllerFront {
     @PostMapping("/login")
     @ResponseBody
     public boolean isLogged(@RequestBody DTOUser user) {
-
-        this.logger.info(serviceUser.isLogged(user.getLogin(),user.getPassword()).toString());
         return serviceUser.isLogged(user.getLogin(),user.getPassword());
     }
 

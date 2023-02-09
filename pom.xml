@@ -121,7 +121,6 @@
                     <arguments>
                         <argument>build</argument>
                     </arguments>
-
                 </configuration>
             </plugin>
             <plugin>

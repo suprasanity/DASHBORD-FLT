@@ -1,6 +1,6 @@
 package com.example.dashboard.service;
 
-import com.example.dashboard.DAO.DAOWSStatus;
+import com.example.dashboard.dao.DAOWSStatus;
 import com.example.dashboard.model.WebService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

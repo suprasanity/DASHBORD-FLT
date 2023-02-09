@@ -1,4 +1,4 @@
-package com.example.dashboard.Discord;
+package com.example.dashboard.discord;
 
 
 import com.example.dashboard.WebsiteApplication;
@@ -58,7 +58,7 @@ public class EventDisc implements EventListener {
             if (messageReceivedEvent.getMessage().getContentRaw().startsWith("!facture")) {
                 long rand= Math.round( Math.random() * ( 1000  ));
                 facturation.build(messageReceivedEvent.getMessage().getContentRaw().split(" ")[1], messageReceivedEvent.getMessage().getContentRaw().split(" ")[2], Integer.parseInt( messageReceivedEvent.getMessage().getContentRaw().split(" ")[3]),rand);
-                File f=new File(facturation.fileOutputPath+messageReceivedEvent.getMessage().getContentRaw().split(" ")[1]+rand+".pdf");
+                File f=new File(facturation.fileOutputPath +messageReceivedEvent.getMessage().getContentRaw().split(" ")[1]+rand+".pdf");
                 FileUpload fileUpload = FileUpload.fromData(f);
                 messageReceivedEvent.getChannel().sendMessage("Facture").addFiles(fileUpload).queue();
                 mail.send(messageReceivedEvent.getMessage().getContentRaw().split(" ")[4],"test","test", f);

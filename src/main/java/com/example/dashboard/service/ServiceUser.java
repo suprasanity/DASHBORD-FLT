@@ -1,6 +1,6 @@
 package com.example.dashboard.service;
 
-import com.example.dashboard.DAO.DAOUser;
+import com.example.dashboard.dao.DAOUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
