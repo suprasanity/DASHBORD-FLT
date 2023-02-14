@@ -7,6 +7,9 @@ import org.springframework.ldap.core.support.LdapContextSource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.ldap.authentication.BindAuthenticator;
 import org.springframework.security.ldap.authentication.LdapAuthenticationProvider;
 import org.springframework.security.ldap.search.FilterBasedLdapUserSearch;
@@ -15,9 +18,12 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
@@ -25,21 +31,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Bean
     CorsConfigurationSource corsConfigurationSource()
     {
-        List<String> list = new ArrayList<>();
-        list.add("http://chovy.freeboxos.fr");
-        list.add("http://localhost");
+          CorsConfiguration configuration = new CorsConfiguration();
+            configuration.setAllowedOrigins(getListAllowedOrigins());
+            configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
+            configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Origin","Access-Control-Allow-Headers","Origin","X-Requested-With","Content-Type","Access-Control-Request-Method","Access-Control-Request-Headers","Authorization"));
+            configuration.setMaxAge(Duration.ofMinutes(30));
+            UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+            source.registerCorsConfiguration("/**", configuration);
+            return source;
+    }
 
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(list);
-        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
+    private List<String> getListAllowedOrigins() {
+        String[]array = {"http://localhost:80","http://chovy.freeboxos.fr:80"};
+        return new ArrayList<>(Arrays.asList(array));
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http.csrf().disable();
+        http.cors(withDefaults())
+                .headers().frameOptions().disable()
+                .contentSecurityPolicy("default-src: 'none';")
+                .and()
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 .authorizeRequests()
                 .antMatchers("/api/*").fullyAuthenticated()
                 .and()
@@ -47,6 +63,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
         ;
     }
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+
+
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
