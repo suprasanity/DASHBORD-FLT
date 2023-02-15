@@ -1,6 +1,6 @@
 FROM adoptopenjdk:17-jdk-hotspot
 RUN apt-get update && apt-get install -y curl
-RUN curl -sL https://deb.nodesource.com/setup_15.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get update && apt-get install -y nodejs
 WORKDIR /app
 COPY package*.json ./
@@ -9,4 +9,4 @@ COPY . .
 RUN npm run build
 EXPOSE 80
 COPY docker-compose.yml .
-CMD ["java", "-jar", "target/my-app.jar"]
+CMD ["java", "-jar", "target/website-0.0.1-SNAPSHOT.jar"]
