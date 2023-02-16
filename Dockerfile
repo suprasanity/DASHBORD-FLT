@@ -6,7 +6,6 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build
 EXPOSE 80
 COPY docker-compose.yml .
 CMD ["java", "-jar", "target/website-0.0.1-SNAPSHOT.jar"]
