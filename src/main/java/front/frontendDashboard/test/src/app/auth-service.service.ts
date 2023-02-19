@@ -22,7 +22,7 @@ export class AuthServiceService {
 
     })
 
-    this.http.get('http://192.168.1.10/api/StartMc',{headers}).subscribe();
+    this.http.get('http://172.17.0.2/api/StartMc',{headers}).subscribe();
   }
 
 
@@ -35,7 +35,7 @@ export class AuthServiceService {
 
     })
 
-    this.http.get('http://192.168.1.10/api/StopMc',{headers}).subscribe();
+    this.http.get('http://172.17.0.2/api/StopMc',{headers}).subscribe();
   }
 
    async login(data: { password: string; login: string })  {
@@ -45,7 +45,7 @@ export class AuthServiceService {
       'Authorization': this.basicAuthHeader
     });
     try {
-      const response = await this.http.post('http://192.168.1.10/api/login', JSON.stringify(data), {headers}).toPromise();
+      const response = await this.http.post('http://172.17.0.2/api/login', JSON.stringify(data), {headers}).toPromise();
       return response;
     }catch (e) {
       console.log(e);
@@ -66,7 +66,7 @@ export class AuthServiceService {
     })
 
 
-    return this.http.get<Webservice[]>('http://192.168.1.10/api/getAllService', {headers} );
+    return this.http.get<Webservice[]>('http://172.17.0.2/api/getAllService', {headers} );
 
   }
 
@@ -78,7 +78,7 @@ export class AuthServiceService {
     });
 
     try {
-      const response = await this.http.post('http://192.168.1.10/api/deleteService', data.id, {headers}).toPromise();
+      const response = await this.http.post('http://172.17.0.2/api/deleteService', data.id, {headers}).toPromise();
       return response;
     }catch (e) {
       console.log(e);
