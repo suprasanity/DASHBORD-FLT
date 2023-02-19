@@ -5,7 +5,6 @@ import com.example.dashboard.discord.EventDisc;
 import com.example.dashboard.model.WebService;
 import com.example.dashboard.service.Mail;
 import com.example.dashboard.service.ServiceWSStatus;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,11 +21,6 @@ import java.util.List;
 @EnableScheduling
 
 public class WebsiteApplication  extends SpringBootServletInitializer {
-
-    public static boolean log = false;
-
-    public static String token = null;
-    public static String numChange = null;
 
 
 @Autowired
@@ -53,10 +47,6 @@ Mail mail;
              }catch (Exception e){
                  serviceWSStatus.updateStatus((list.get(i)).getId(),"404");
              }
-                if(!( list.get(i)).getStatus().equals("200") && log)
-                {
-                    bot.sendMsg("Le service "+( list.get(i)).getUrl()+" est KO son code erreur est " + ( list.get(i)).getStatus(),"779369141948776498","1049799594076291093");
-                }
           }
 
     }
@@ -65,11 +55,6 @@ Mail mail;
 
 
     public static void main(String[] args) {
-        token = args[0];
-        if(args.length>1)
-        {
-             numChange = args[1];
-        }
         SpringApplication.run(WebsiteApplication.class, args);
     }
 }

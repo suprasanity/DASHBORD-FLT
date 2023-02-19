@@ -1,14 +1,11 @@
 package com.example.dashboard.discord;
-
-
-
-import com.example.dashboard.WebsiteApplication;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +16,9 @@ private JDA jda;
 @Autowired
 EventDisc eventDisc;
 
+@Value("${discord.token}")
+private String token;
+
 
 private  Logger logger = org.slf4j.LoggerFactory.getLogger(Bot.class);
 
@@ -27,7 +27,7 @@ private  Logger logger = org.slf4j.LoggerFactory.getLogger(Bot.class);
 @PostConstruct
 public void init() throws InterruptedException {
 
-        this.jda = JDABuilder.createDefault(WebsiteApplication.token).addEventListeners(eventDisc).enableIntents(GatewayIntent.MESSAGE_CONTENT).build();
+        this.jda = JDABuilder.createDefault(token).addEventListeners(eventDisc).enableIntents(GatewayIntent.MESSAGE_CONTENT).build();
         this.jda.awaitReady();
         logger.info("Bot discord Connected");
 }

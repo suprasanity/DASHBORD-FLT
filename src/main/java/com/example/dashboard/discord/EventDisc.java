@@ -1,7 +1,5 @@
 package com.example.dashboard.discord;
 
-
-import com.example.dashboard.WebsiteApplication;
 import com.example.dashboard.service.Chatgpt;
 import com.example.dashboard.service.Facturation;
 import com.example.dashboard.service.Mail;
@@ -52,9 +50,6 @@ public class EventDisc implements EventListener {
             if (messageReceivedEvent.getAuthor().isBot()) {
                 return;
             }
-            if (messageReceivedEvent.getMessage().getContentRaw().equals("!ping")) {
-                messageReceivedEvent.getChannel().sendMessage("pong").queue();
-            }
             if (messageReceivedEvent.getMessage().getContentRaw().startsWith("!facture")) {
                 long rand= Math.round( Math.random() * ( 1000  ));
                 facturation.build(messageReceivedEvent.getMessage().getContentRaw().split(" ")[1], messageReceivedEvent.getMessage().getContentRaw().split(" ")[2], Integer.parseInt( messageReceivedEvent.getMessage().getContentRaw().split(" ")[3]),rand);
@@ -65,23 +60,13 @@ public class EventDisc implements EventListener {
             }
             if (messageReceivedEvent.getMessage().getContentRaw().startsWith("!gideon")) {
                 messageReceivedEvent.getChannel().sendMessage("gideon Refléchit ").queue();
-               String reponse = chatgpt.ask(getSecondPart( messageReceivedEvent.getMessage().getContentRaw()));
+                String reponse = chatgpt.ask(getSecondPart( messageReceivedEvent.getMessage().getContentRaw()));
                 String[] lines = reponse.split("\n");
                 for (String line : lines) {
                     if (!line.equals("")){
                         messageReceivedEvent.getChannel().sendMessage(line).queue();
                     }
                 }
-            }
-            if (messageReceivedEvent.getMessage().getContentRaw().equals("!log")) {
-               if (WebsiteApplication.log) {
-                   WebsiteApplication.log = false;
-                   messageReceivedEvent.getChannel().sendMessage("Log désactivé").queue();
-                }
-               else{
-                   WebsiteApplication.log = true;
-                   messageReceivedEvent.getChannel().sendMessage("Log activé").queue();
-               }
             }
          }
     }

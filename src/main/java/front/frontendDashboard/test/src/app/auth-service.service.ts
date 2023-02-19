@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {firstValueFrom, Observable} from "rxjs";
 import {Webservice} from "./webservice";
 
 @Injectable({
@@ -45,7 +45,7 @@ export class AuthServiceService {
       'Authorization': this.basicAuthHeader
     });
     try {
-      const response = await this.http.post('http://192.168.1.10:5000/api/login', JSON.stringify(data), {headers}).toPromise();
+      const response = await firstValueFrom( this.http.post('http://192.168.1.10:5000/api/login', JSON.stringify(data), {headers}));
       return response;
     }catch (e) {
       console.log(e);
@@ -78,7 +78,7 @@ export class AuthServiceService {
     });
 
     try {
-      const response = await this.http.post('http://192.168.1.10:5000/api/deleteService', data.id, {headers}).toPromise();
+      const response = await firstValueFrom( this.http.post('http://192.168.1.10:5000/api/deleteService', data.id, {headers}));
       return response;
     }catch (e) {
       console.log(e);
