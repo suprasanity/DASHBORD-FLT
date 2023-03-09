@@ -1,5 +1,6 @@
 package com.example.dashboard.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -16,10 +17,14 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 @Service
 public class Mail {
+    @Value("${mail}")
+    private String mailAdress;
+    @Value("${passMail}")
+    private String password;
 
     public void send(String to, String subject, String content, File attachment) {
 
-        String from = "yann.jeanmaire@gmail.com";
+        String from = mailAdress;
         // Mention the SMTP server address. Below Gmail's SMTP server is being used to send email
         String host = "smtp.gmail.com";
         // Get system properties
@@ -33,7 +38,7 @@ public class Mail {
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("yann.jeanmaire@gmail.com", "trpubijqdjtiodba");
+                return new PasswordAuthentication(mailAdress, password);
             }
         });
         // Used to debug SMTP issues
