@@ -28,7 +28,7 @@ public class WebConfig {
 
     @EventListener(ApplicationReadyEvent.class)
     public void doSomethingAfterStartup() {
-        logger.info("Hello world, I have just started up ");
+        logger.info("Hello world, I have just started up   CECI EST UN TEST");
     }
 
 }
