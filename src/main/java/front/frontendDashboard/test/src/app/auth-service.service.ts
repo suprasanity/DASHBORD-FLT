@@ -22,7 +22,7 @@ export class AuthServiceService {
 
     })
 
-    this.http.get('http://192.168.1.10:8001/api/StartMc',{headers}).subscribe();
+    this.http.get('http://chovy.freeboxos.fr:8001/api/StartMc',{headers}).subscribe();
   }
 
 
@@ -35,7 +35,7 @@ export class AuthServiceService {
 
     })
 
-    this.http.get('http://192.168.1.10:8001/api/StopMc',{headers}).subscribe();
+    this.http.get('http://chovy.freeboxos.fr:8001/api/StopMc',{headers}).subscribe();
   }
 
    async login(data: { password: string; login: string })  {
@@ -45,7 +45,7 @@ export class AuthServiceService {
       'Authorization': this.basicAuthHeader
     });
     try {
-      const response = await firstValueFrom( this.http.post('http://192.168.1.10:8001/api/login', JSON.stringify(data), {headers}));
+      const response = await firstValueFrom( this.http.post('http://chovy.freeboxos.fr:8001/api/login', JSON.stringify(data), {headers}));
       return response;
     }catch (e) {
       console.log(e);
@@ -66,7 +66,7 @@ export class AuthServiceService {
     })
 
 
-    return this.http.get<Webservice[]>('http://192.168.1.10:8001/api/getAllService', {headers} );
+    return this.http.get<Webservice[]>('http://chovy.freeboxos.fr:8001/api/getAllService', {headers} );
 
   }
 
@@ -78,7 +78,7 @@ export class AuthServiceService {
     });
 
     try {
-      const response = await firstValueFrom( this.http.post('http://192.168.1.10:8001/api/deleteService', data.id, {headers}));
+      const response = await firstValueFrom( this.http.post('http://chovy.freeboxos.fr:8001/api/deleteService', data.id, {headers}));
       return response;
     }catch (e) {
       console.log(e);
