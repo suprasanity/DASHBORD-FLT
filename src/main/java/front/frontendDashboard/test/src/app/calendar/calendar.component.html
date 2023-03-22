@@ -2,14 +2,15 @@
   <thead>
   <tr>
     <th></th>
-    <th *ngFor="let day of days">{{ day | date:'EEE' }}</th>
+    <th style="width: 100px;" *ngFor="let day of days">
+      {{ day | date:'EEE' }}
+    </th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let hour of hours">
     <td>{{ hour }}:00</td>
-    <td *ngFor="let day of days" (click)="addNote(hour, day)">
-      {{ getNoteText(hour, day) }}
+    <td *ngFor="let day of days" (click)="addNote(hour, day)"style="border: 1px solid black;">{{ getNoteText(hour, day) }}
     </td>
   </tr>
   </tbody>
