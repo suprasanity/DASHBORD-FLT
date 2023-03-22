@@ -1,1 +1,16 @@
-<p>calendar works!</p>
+<table>
+  <thead>
+  <tr>
+    <th></th>
+    <th *ngFor="let day of days">{{ day | date:'EEE' }}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let hour of hours">
+    <td>{{ hour }}:00</td>
+    <td *ngFor="let day of days" (click)="addNote(hour, day)">
+      {{ getNoteText(hour, day) }}
+    </td>
+  </tr>
+  </tbody>
+</table>

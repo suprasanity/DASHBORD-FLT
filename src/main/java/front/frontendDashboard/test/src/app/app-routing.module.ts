@@ -5,6 +5,7 @@ import {ServerComponent} from "./server/server.component";
 import {AuthGuard} from "./auth.guard";
 import {AcceuilComponent} from "./acceuil/acceuil.component";
 import {WebserviceComponent} from "./webservice/webservice.component";
+import {CalendarComponent} from "./calendar/calendar.component";
 
 const routes: Routes = [
   { path: 'signIn', component: LoginComponentComponent ,
@@ -16,6 +17,9 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'ws', component: WebserviceComponent ,
+    canActivate: [AuthGuard]
+  },
+  { path: 'calendar', component: CalendarComponent ,
     canActivate: [AuthGuard]
   },
   { path: '**', redirectTo: 'signIn', pathMatch: 'full' }

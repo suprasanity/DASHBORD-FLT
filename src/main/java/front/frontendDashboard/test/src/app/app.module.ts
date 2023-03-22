@@ -15,6 +15,15 @@ import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import {MatDividerModule} from '@angular/material/divider';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {
+  CalendarCommonModule,
+  CalendarDayModule,
+  CalendarModule,
+  CalendarMonthModule,
+  CalendarWeekModule, DateAdapter
+} from "angular-calendar";
+import {FlatpickrModule} from "angularx-flatpickr";
+import {adapterFactory} from "calendar-utils/date-adapters/moment";
 
 
 @NgModule({
@@ -26,20 +35,30 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     AcceuilComponent,
     CalendarComponent,
     WebserviceComponent,
+    CalendarComponent,
 
 
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        HttpClientModule,
-        NgChartsModule,
-        MatCardModule,
-        BrowserAnimationsModule,
-        MatDividerModule,
-       MatProgressBarModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    NgChartsModule,
+    MatCardModule,
+    BrowserAnimationsModule,
+    MatDividerModule,
+    MatProgressBarModule,
+    CalendarCommonModule,
+    CalendarMonthModule,
+    CalendarWeekModule,
+    CalendarDayModule,
+    FlatpickrModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
