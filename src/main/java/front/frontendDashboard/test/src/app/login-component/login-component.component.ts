@@ -25,7 +25,7 @@ export class LoginComponentComponent implements OnInit {
       if (this.response != "") {
         this.authService.auth = true;
 
-        const expiration = new Date().getTime() + 360;
+        const expiration = new Date().getTime() + 360000;
         localStorage.setItem('LOGGED', expiration.toString());
         localStorage.setItem('USER', this.response);
 
