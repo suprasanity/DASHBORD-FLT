@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthServiceService} from "../auth-service.service";
+import {Tache} from "../tache";
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent {
+export class CalendarComponent implements OnInit {
   days: Date[] = [];
   hours: number[] = [];
+  tache : Tache[]= [];
 
-  constructor() {
+  constructor(private authService : AuthServiceService) {
     // Populate the days array with the next 7 days
     for (let i = 0; i < 7; i++) {
       const date = new Date();
@@ -36,5 +39,14 @@ export class CalendarComponent {
       localStorage.setItem(`${day.toISOString()}-${hour}`, note);
     }
   }
+
+  ngOnInit(): void {
+    const data = {
+      id: localStorage.getItem('USER')
+    }
+    this.authService.getAllTache(data).subscribe((result)=>{
+      this.tache = result;
+    })
+    alert(this.tache[0].nom)
 }
-``
+}

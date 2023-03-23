@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {firstValueFrom, Observable} from "rxjs";
 import {Webservice} from "./webservice";
+import {Tache} from "./tache";
 
 @Injectable({
   providedIn: 'root'
@@ -84,6 +85,19 @@ export class AuthServiceService {
       console.log(e);
     }
     return null;
+  }
+
+  getAllTache(data: { id: string |null}) : Observable<Tache[]> {
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin' : '*',
+      'Content-Type': 'application/json',
+      'Authorization': this.basicAuthHeader
+
+    })
+
+
+    return this.http.post<Tache[]>('http://chovy.freeboxos.fr:8001/api/getTacheByUser',data.id, {headers} );
+
   }
 
 }

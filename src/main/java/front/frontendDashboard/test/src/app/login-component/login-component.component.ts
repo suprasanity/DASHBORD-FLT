@@ -25,6 +25,7 @@ export class LoginComponentComponent implements OnInit {
 
         const expiration = new Date().getTime() + 3600000;
         localStorage.setItem('LOGGED', expiration.toString());
+        localStorage.setItem('USER',this.login);
         await this.router.navigate(['/acceuil']);
       }else {
         alert("Wrong login or password");
