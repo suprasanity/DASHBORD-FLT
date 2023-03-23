@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthServiceService} from "../auth-service.service";
 import {Router} from "@angular/router";
 
@@ -7,7 +7,7 @@ import {Router} from "@angular/router";
   templateUrl: './login-component.component.html',
   styleUrls: ['./login-component.component.css']
 })
-export class LoginComponentComponent {
+export class LoginComponentComponent implements OnInit {
   password: string ="";
   login: string="";
 
@@ -33,4 +33,12 @@ export class LoginComponentComponent {
       console.log(e);
     }
    }
+
+  ngOnInit(): void {
+    // @ts-ignore
+    if(localStorage.getItem('LOGGED') == null || (localStorage.getItem('LOGGED') < new Date().getTime().toString())) {
+
+      this.router.navigate(['/acceuil']).then(r => console.log(r));
+    }
+  }
 }
