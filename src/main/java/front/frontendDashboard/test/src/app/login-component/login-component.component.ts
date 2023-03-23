@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 export class LoginComponentComponent implements OnInit {
   password: string ="";
   login: string="";
+  response : string="";
 
   constructor(private authService : AuthServiceService,private router:Router) { }
 
@@ -19,13 +20,15 @@ export class LoginComponentComponent implements OnInit {
       password: this.password
     }
    try {
-      const response = await this.authService.login(data);
-      if (response) {
+       this.response  = await this.authService.login(data);
+       console.log(this.response);
+      if (this.response != "") {
         this.authService.auth = true;
 
-        const expiration = new Date().getTime() + 3600000;
+        const expiration = new Date().getTime() + 360;
         localStorage.setItem('LOGGED', expiration.toString());
-        localStorage.setItem('USER',this.login);
+        localStorage.setItem('USER', this.response);
+
         await this.router.navigate(['/acceuil']);
       }else {
         alert("Wrong login or password");

@@ -12,9 +12,9 @@ public class ServiceUser {
     @Autowired
     private DAOUser daoUser;
 
-    public Boolean isLogged(String login, String password)
+    public long isLogged(String login, String password)
     {
-       return daoUser.getUserByLogin(login,password) != null;
+       return daoUser.getUserByLogin(login,password);
     }
 
     public boolean register(String login, String password, String email, String tel) {

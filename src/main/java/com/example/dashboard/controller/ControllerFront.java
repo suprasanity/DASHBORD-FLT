@@ -100,7 +100,7 @@ public class ControllerFront {
 
     @PostMapping("/login")
     @ResponseBody
-    public boolean isLogged(@RequestBody DTOUser user) {
+    public Long isLogged(@RequestBody DTOUser user) {
         return serviceUser.isLogged(user.getLogin(),user.getPassword());
     }
 

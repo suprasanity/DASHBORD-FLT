@@ -29,7 +29,7 @@ public class DAOUser  {
         em.persist(user);
     }
     @Transactional
-    public User getUserByLogin(String login, String password) {
+    public Long getUserByLogin(String login, String password) {
         List<User> users = em.createQuery("select u from User u where u.username = :login and u.password = :password", User.class)
                 .setParameter("login", login)
                 .setParameter("password", password)
@@ -37,7 +37,7 @@ public class DAOUser  {
         if (users.isEmpty()) {
             return null;
         }
-        return users.get(0);
+        return users.get(0).getId();
     }
     @Transactional
     public List<Tache> getTachesByUserId(long id) {

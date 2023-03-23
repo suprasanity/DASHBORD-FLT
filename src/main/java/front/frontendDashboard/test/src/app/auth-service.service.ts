@@ -39,19 +39,19 @@ export class AuthServiceService {
     this.http.get('http://chovy.freeboxos.fr:8001/api/StopMc',{headers}).subscribe();
   }
 
-   async login(data: { password: string; login: string })  {
+   async login(data: { password: string; login: string }) :Promise<string>  {
     const headers = new HttpHeaders({
       'Access-Control-Allow-Origin' : '*',
       'Content-Type': 'application/json',
       'Authorization': this.basicAuthHeader
     });
+    let response: Object = "";
     try {
-      const response = await firstValueFrom( this.http.post('http://chovy.freeboxos.fr:8001/api/login', JSON.stringify(data), {headers}));
-      return response;
+       response = await firstValueFrom( this.http.post('http://chovy.freeboxos.fr:8001/api/login', JSON.stringify(data), {headers}));
+      return response.toString();
     }catch (e) {
-      console.log(e);
     }
-    return null;
+    return "";
   }
 
   public getAuth() : boolean {
