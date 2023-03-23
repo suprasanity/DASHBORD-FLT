@@ -22,7 +22,8 @@ const routes: Routes = [
   { path: 'calendar', component: CalendarComponent ,
     canActivate: [AuthGuard]
   },
-  { path: '**', redirectTo: 'signIn', pathMatch: 'full' }
+  { path: '**', redirectTo: 'signIn', pathMatch: 'full' },
+  { path: '', redirectTo: 'signIn', pathMatch: 'full' }
 ];
 
 @NgModule({
