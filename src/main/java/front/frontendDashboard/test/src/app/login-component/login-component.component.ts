@@ -22,6 +22,9 @@ export class LoginComponentComponent {
       const response = await this.authService.login(data);
       if (response) {
         this.authService.auth = true;
+
+        const expiration = new Date().getTime() + 3600000;
+        localStorage.setItem('LOGGED', expiration.toString());
         await this.router.navigate(['/acceuil']);
       }else {
         alert("Wrong login or password");

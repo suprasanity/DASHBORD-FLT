@@ -3,6 +3,7 @@ package com.example.dashboard.controller;
 import com.example.dashboard.dto.DTOUser;
 import com.example.dashboard.dto.Information;
 import com.example.dashboard.discord.Bot;
+import com.example.dashboard.model.Tache;
 import com.example.dashboard.model.WebService;
 import com.example.dashboard.service.ServiceUser;
 import com.example.dashboard.service.ServiceWSStatus;
@@ -24,7 +25,7 @@ public class ControllerFront {
     @Autowired
     ServiceUser serviceUser;
 
-   private Logger logger =org.slf4j.LoggerFactory.getLogger(ControllerFront.class);
+   private final Logger logger =org.slf4j.LoggerFactory.getLogger(ControllerFront.class);
     @Autowired
     Bot bot;
 
@@ -115,4 +116,17 @@ public class ControllerFront {
         return serviceWSStatus.getWSStatudByName(name);
     }
 
+
+    //getTacheByUser
+
+    @PostMapping("/getTacheByUser")
+    @ResponseBody
+    public List<Tache> getTacheByUser(@RequestBody String id){
+        try {
+        return serviceUser.getTachesByUserId(Integer.parseInt(id.substring(3)));
+        }catch (Exception e){
+            this.logger.error(e.getMessage());
+            return null;
+        }
+    }
 }

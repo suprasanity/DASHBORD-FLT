@@ -36,6 +36,7 @@
     "cors": "^2.8.5",
     "date-fns": "^2.29.3",
     "flatpickr": "4.6.13",
+    "localstorage-polyfill": "^1.0.1",
     "ng2-charts": "^4.1.1",
     "rrule": "2.7.1",
     "rxjs": "~7.5.0",

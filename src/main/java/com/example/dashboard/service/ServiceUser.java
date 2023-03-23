@@ -1,8 +1,11 @@
 package com.example.dashboard.service;
 
 import com.example.dashboard.dao.DAOUser;
+import com.example.dashboard.model.Tache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ServiceUser {
@@ -21,5 +24,8 @@ public class ServiceUser {
             return true;
         }
         return false;
+    }
+    public List<Tache> getTachesByUserId(int id) {
+        return daoUser.getTachesByUserId(id);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.dashboard.dao;
 
 
+import com.example.dashboard.model.Tache;
 import com.example.dashboard.model.User;
 
 import org.springframework.stereotype.Repository;
@@ -37,6 +38,16 @@ public class DAOUser  {
             return null;
         }
         return users.get(0);
+    }
+    @Transactional
+    public List<Tache> getTachesByUserId(long id) {
+        List<Tache> taches = em.createQuery("select u from Tache u where u.user.userId =:id", Tache.class)
+                .setParameter("id", id)
+                .getResultList();
+        if (taches.isEmpty()) {
+            return null;
+        }
+        return taches;
     }
 }
 
