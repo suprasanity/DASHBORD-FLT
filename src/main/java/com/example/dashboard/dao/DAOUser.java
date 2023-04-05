@@ -11,6 +11,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+import static java.util.Collections.emptyList;
+
 
 @Repository
 public class DAOUser  {
@@ -45,7 +47,7 @@ public class DAOUser  {
                 .setParameter("id", id)
                 .getResultList();
         if (taches.isEmpty()) {
-            return null;
+            return emptyList();
         }
         return taches;
     }

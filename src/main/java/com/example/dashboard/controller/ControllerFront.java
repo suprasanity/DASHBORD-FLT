@@ -15,6 +15,8 @@ import org.slf4j.Logger;
 import java.io.*;
 import java.util.List;
 
+import static java.util.Collections.emptyList;
+
 @RestController
 @CrossOrigin(origins ="*", allowedHeaders = "*")
 @RequestMapping("/api")
@@ -126,7 +128,7 @@ public class ControllerFront {
         return serviceUser.getTachesByUserId(Integer.parseInt(id.substring(3)));
         }catch (Exception e){
             this.logger.error(e.getMessage());
-            return null;
+            return emptyList();
         }
     }
 }
