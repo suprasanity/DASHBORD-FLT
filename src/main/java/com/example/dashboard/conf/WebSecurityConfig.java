@@ -39,7 +39,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        http.cors(withDefaults())
+        http
+                .cors()
+                .configurationSource(request -> {
+                    CorsConfiguration config = new CorsConfiguration();
+                    config.addAllowedOrigin("*");
+                    config.addAllowedMethod("*");
+                    config.addAllowedHeader("*");
+                    return config;
+                });
+        http
                 .headers().frameOptions().disable()
                 .contentSecurityPolicy("default-src: 'none';")
                 .and()
