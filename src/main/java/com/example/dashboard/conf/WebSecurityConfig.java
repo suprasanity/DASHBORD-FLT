@@ -16,13 +16,6 @@ import org.springframework.security.ldap.search.FilterBasedLdapUserSearch;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
@@ -31,20 +24,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Bean
     CorsConfigurationSource corsConfigurationSource()
     {
-          CorsConfiguration configuration = new CorsConfiguration();
-            configuration.setAllowedOrigins(getListAllowedOrigins());
-            configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE"));
-            configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Origin","Access-Control-Allow-Headers","Origin","X-Requested-With","Content-Type","Access-Control-Request-Method","Access-Control-Request-Headers","Authorization"));
-            configuration.setMaxAge(Duration.ofMinutes(30));
-            UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-            source.registerCorsConfiguration("/**", configuration);
-            return source;
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.addAllowedOrigin("*"); // Allow any origin
+        configuration.addAllowedHeader("*"); // Allow any header
+        configuration.addAllowedMethod("*"); // Allow any HTTP method
+        configuration.setAllowCredentials(true); // Allow credentials
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
-    private List<String> getListAllowedOrigins() {
-        String[]array = {"http://localhost:80","http://chovy.freeboxos.fr:80"};
-        return new ArrayList<>(Arrays.asList(array));
-    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -81,7 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Bean
     public LdapContextSource contextSource() {
         LdapContextSource contextSource = new LdapContextSource();
-        contextSource.setUrl("ldap://chovy.freeboxos.fr");
+        contextSource.setUrl("ldap://192.168.1.10");
         contextSource.setBase("dc=chovy,dc=freeboxos,dc=fr");
         contextSource.setUserDn("cn=admin,dc=chovy,dc=freeboxos,dc=fr");
         contextSource.setPassword("yann");
