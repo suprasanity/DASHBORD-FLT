@@ -56,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 });
         http
                 .headers().frameOptions().disable()
-                .contentSecurityPolicy("default-src: 'none';")
+                .contentSecurityPolicy("default-src 'none';")
                 .and()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
