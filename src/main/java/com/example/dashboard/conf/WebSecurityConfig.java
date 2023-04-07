@@ -1,5 +1,6 @@
 package com.example.dashboard.conf;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.ldap.core.LdapTemplate;
@@ -16,10 +17,15 @@ import org.springframework.security.ldap.search.FilterBasedLdapUserSearch;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+
+    @Value("${ldap.url}")
+    private String ldapUrl;
+
+    @Value("${ldap.password}")
+    private String ldapPassword;
 
     @Bean
     CorsConfigurationSource corsConfigurationSource()
@@ -80,10 +86,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Bean
     public LdapContextSource contextSource() {
         LdapContextSource contextSource = new LdapContextSource();
-        contextSource.setUrl("ldap://192.168.1.10");
+        contextSource.setUrl(this.ldapUrl);
         contextSource.setBase("dc=chovy,dc=freeboxos,dc=fr");
         contextSource.setUserDn("cn=admin,dc=chovy,dc=freeboxos,dc=fr");
-        contextSource.setPassword("yann");
+        contextSource.setPassword(this.ldapPassword);
         return contextSource;
     }
 
