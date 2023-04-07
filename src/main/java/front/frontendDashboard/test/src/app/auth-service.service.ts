@@ -23,7 +23,7 @@ export class AuthServiceService {
 
     })
 
-    this.http.get('http://192.168.1.10:8001/api/StartMc',{headers}).subscribe();
+    this.http.get('http://localhost:8001/api/StartMc',{headers}).subscribe();
   }
 
 
@@ -36,7 +36,7 @@ export class AuthServiceService {
 
     })
 
-    this.http.get('http://192.168.1.10:8001/api/StopMc',{headers}).subscribe();
+    this.http.get('http://localhost:8001/api/StopMc',{headers}).subscribe();
   }
 
    async login(data: { password: string; login: string }) :Promise<string>  {
@@ -47,7 +47,7 @@ export class AuthServiceService {
     });
     let response: Object = "";
     try {
-       response = await firstValueFrom( this.http.post('http://192.168.1.10:8001/api/login', JSON.stringify(data), {headers}));
+       response = await firstValueFrom( this.http.post('http://localhost:8001/api/login', JSON.stringify(data), {headers}));
       return response.toString();
     }catch (e) {
     }
@@ -67,7 +67,7 @@ export class AuthServiceService {
     })
 
 
-    return this.http.get<Webservice[]>('http://192.168.1.10:8001/api/getAllService', {headers} );
+    return this.http.get<Webservice[]>('http://localhost:8001/api/getAllService', {headers} );
 
   }
 
@@ -79,7 +79,7 @@ export class AuthServiceService {
     });
 
     try {
-      const response = await firstValueFrom( this.http.post('http://192.168.1.10:8001/api/deleteService', data.id, {headers}));
+      const response = await firstValueFrom( this.http.post('http://localhost:8001/api/deleteService', data.id, {headers}));
       return response;
     }catch (e) {
       console.log(e);
@@ -96,7 +96,7 @@ export class AuthServiceService {
     })
 
 
-    return this.http.post<Tache[]>('http://192.168.1.10:8001/api/getTacheByUser',data.id, {headers} );
+    return this.http.post<Tache[]>('http://localhost:8001/api/getTacheByUser',data.id, {headers} );
 
   }
 
