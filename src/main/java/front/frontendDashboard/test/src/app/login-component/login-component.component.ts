@@ -22,7 +22,7 @@ export class LoginComponentComponent implements OnInit {
    try {
        this.response  = await this.authService.login(data);
        console.log(this.response);
-      if (this.response != "") {
+      if (this.response !== "-1") {
         this.authService.auth = true;
 
         const expiration = new Date().getTime() + 360000;

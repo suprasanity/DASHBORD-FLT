@@ -37,7 +37,7 @@ public class DAOUser  {
                 .setParameter("password", password)
                 .getResultList();
         if (users.isEmpty()) {
-            return null;
+            return -1L;
         }
         return users.get(0).getId();
     }
