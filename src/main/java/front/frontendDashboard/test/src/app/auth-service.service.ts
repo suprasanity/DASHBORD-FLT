@@ -8,6 +8,7 @@ import {Tache} from "./tache";
   providedIn: 'root'
 })
 export class AuthServiceService {
+  showNavBar: boolean = false;
   auth: boolean = false;
   basicAuthHeader = 'Basic ' + btoa( "john:admin");
 
@@ -79,8 +80,7 @@ export class AuthServiceService {
     });
 
     try {
-      const response = await firstValueFrom( this.http.post('/api/deleteService', data.id, {headers}));
-      return response;
+      return await firstValueFrom( this.http.post('/api/deleteService', data.id, {headers}));
     }catch (e) {
       console.log(e);
     }
@@ -100,4 +100,7 @@ export class AuthServiceService {
 
   }
 
+  getNavBar() {
+    return this.showNavBar;
+  }
 }

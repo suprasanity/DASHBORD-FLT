@@ -24,6 +24,7 @@ export class LoginComponentComponent implements OnInit {
        console.log(this.response);
       if (this.response !== "-1") {
         this.authService.auth = true;
+        this.authService.showNavBar = true;
 
         const expiration = new Date().getTime() + 360000;
         localStorage.setItem('LOGGED', expiration.toString());
@@ -31,6 +32,7 @@ export class LoginComponentComponent implements OnInit {
 
         await this.router.navigate(['/acceuil']);
       }else {
+        this.authService.showNavBar = false;
         alert("Wrong login or password");
       }
     }catch (e) {
