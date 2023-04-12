@@ -3,7 +3,7 @@ RUN apt-get update && apt-get install -y curl
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get update && apt-get install -y nodejs
 WORKDIR /app
-COPY /src/main/java/front/frontendDashboard/test/package.json ./
+COPY /src/main/java/front/frontendDashboard/app/package.json ./
 RUN npm install
 COPY . .
 EXPOSE 80
