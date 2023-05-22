@@ -1,0 +1,11 @@
+<div [@fade] *ngIf="showSection1">
+  <h1>Section 1</h1>
+  <!-- Contenu de la première section -->
+  <button (click)="toggleSections()">Toggle Sections</button>
+</div>
+
+<div [@fade] *ngIf="!showSection1">
+  <h1>Section 2</h1>
+  <!-- Contenu de la deuxième section -->
+  <button (click)="toggleSections()">Toggle Sections</button>
+</div>
