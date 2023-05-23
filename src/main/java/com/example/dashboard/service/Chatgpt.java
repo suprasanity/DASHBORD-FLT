@@ -1,5 +1,6 @@
 package com.example.dashboard.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -8,8 +9,11 @@ import java.net.URL;
 @Component
 public class Chatgpt {
     public static final  String URL = "https://api.openai.com/v1/completions";
-    public static final String BEARER ="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";//your token here
-    public static final String MODEL ="text-davinci-edit-001";//your model here
+
+    @Value("${openApi.token}")
+    public String BEARER;
+    //your token here
+    public static final String MODEL ="gpt-3.5-turbo";//your model here
 
 
 
